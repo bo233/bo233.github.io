@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>POJ1195-Mobile phones</title>
+    <url>/2020/02/19/POJ1195-Mobile-phones/</url>
+    <content><![CDATA[<p><a href="http://poj.org/problem?id=1195" target="_blank" rel="noopener">题目链接</a></p>
+<h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>有S*S台基站排列成正方形，每台基站都会记录连接它的手机数，并且该数目随时可能变化。要求输出指定矩形区域内连接手机的总数。</p>
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>由于 S 很大，矩形区域也可能很大，使用双重循环来计算总数会超市，所以需要一种特殊的数据结构：<strong>二维树状数组</strong>。与一维树状数组原理相同，假设二维数组为：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">a[][]=&#123;</span><br><span class="line">	&#123;a11,a12,a13,a14,a15,a16,a17,a18&#125;,</span><br><span class="line">	&#123;a21,a22,a23,a24,a25,a26,a27,a28&#125;,</span><br><span class="line">	&#123;a31,a32,a33,a34,a35,a36,a37,a38&#125;,</span><br><span class="line">	&#123;a41,a42,a43,a44,a45,a46,a47,a48&#125;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>那么树状数组C：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">C[<span class="number">1</span>][<span class="number">1</span>]=a11, C[<span class="number">1</span>][<span class="number">2</span>]=a11+a12;</span><br><span class="line">C[<span class="number">2</span>][<span class="number">1</span>]=a11+a21, C[<span class="number">2</span>][<span class="number">2</span>]=a11+a12+a21+a22;</span><br><span class="line">C[<span class="number">3</span>][<span class="number">1</span>]=a31, C[<span class="number">3</span>][<span class="number">2</span>]=a31+a32;</span><br><span class="line">C[<span class="number">4</span>][<span class="number">1</span>]=a11+a21+a31+a41, C[<span class="number">4</span>][<span class="number">2</span>]=a11+a12+a21+a22+a31+a32+a41+a42；</span><br></pre></td></tr></table></figure>
+
+<p>可以看出，不管是每一行还是每一列，树状数组C都符合x+=lowbit(x)，所以只需要按下图所示的顺序进行一维的add，就能实现二维树状数组的add。</p>
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc1iz7ftrpj30pq0ks0w0.jpg" alt="IMG_0076" style="zoom:33%;" />
+
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN=<span class="number">1025</span>;</span><br><span class="line"><span class="keyword">int</span> tree[MAXN][MAXN];</span><br><span class="line"><span class="keyword">int</span> s;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) x&amp;-(x)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=x, j=y;</span><br><span class="line">    <span class="keyword">while</span>(j&lt;=s)&#123;</span><br><span class="line">        i=x;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;=s)&#123;</span><br><span class="line">            tree[j][i]+=d;</span><br><span class="line">            i+=lowbit(i);</span><br><span class="line">        &#125;</span><br><span class="line">        j+=lowbit(j);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getsum</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=y; i&gt;<span class="number">0</span>; i-=lowbit(i))</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=x; j&gt;<span class="number">0</span>; j-=lowbit(j))</span><br><span class="line">            sum+=tree[i][j];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;s, &amp;s);</span><br><span class="line">    <span class="keyword">int</span> ins=<span class="number">0</span>,x,y,a,l,b,r,t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;ins);</span><br><span class="line">    <span class="keyword">while</span>(ins!=<span class="number">3</span>)&#123;</span><br><span class="line">        <span class="keyword">switch</span>(ins)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>: <span class="comment">//add</span></span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;x, &amp;y, &amp;a);</span><br><span class="line">                x++,y++;</span><br><span class="line">                add(x, y, a);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>, &amp;l, &amp;b, &amp;r, &amp;t);</span><br><span class="line">                l++,r++,b++,t++; <span class="comment">//⚠️注意，这里要++，因为输入的坐标可能为0</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getsum(r,t)-getsum(l<span class="number">-1</span>,t)-getsum(r,b<span class="number">-1</span>)+getsum(l<span class="number">-1</span>,b<span class="number">-1</span>)); <span class="comment">//⚠️注意，部分地方要-1</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;ins);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>需要注意的点已经在代码中标注出来，还是要牢记，<strong>树状数组的下标从1开始</strong>，这一点千万不能忘记。在计算区域和的时候也要注意，<code>getsum(r,t)-getsum(l-1,t)-getsum(r,b-1)+getsum(l-1,b-1)</code>，哪里要减1哪里不需要，要想明白。</p>
+]]></content>
+      <tags>
+        <tag>算法&amp;数据结构</tag>
+        <tag>竞赛</tag>
+        <tag>OJ错题本</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GitHub加速</title>
+    <url>/2020/02/18/GitHub%E5%8A%A0%E9%80%9F/</url>
+    <content><![CDATA[<p>无论是访问GitHub还是用 git 来克隆仓库，由于种种原因，速度都感人的不行，最头疼的是就算开了全局代理，用处似乎也不大。花了一些时间，在网上找到了解决办法。</p>
+<h3 id="GitHub网站访问加速"><a href="#GitHub网站访问加速" class="headerlink" title="GitHub网站访问加速"></a>GitHub网站访问加速</h3><p>原本只是在 PAC 列表里加上了github.com，后来发现由于GitHub还需要用到githubxxx.com的链接，便又加入 github*.com，速度一下就上来了。</p>
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc0xole0c3j30qa08uq5m.jpg" alt="image-20200218224159818" style="zoom:50%;" />
+
+<h3 id="Git-克隆-GitHub-仓库加速"><a href="#Git-克隆-GitHub-仓库加速" class="headerlink" title="Git 克隆 GitHub 仓库加速"></a>Git 克隆 GitHub 仓库加速</h3><p>然鹅上述方法对 git 是没用的。首先先找到代理的监听端口，一般都是1080+，我这里是1086。</p>
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc0xsar00yj30qg0gm418.jpg" alt="image-20200218224534060" style="zoom:50%;" />
+
+<p>然后在终端中输入：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> socks5协议，1080端口修改成自己的本地代理端口</span></span><br><span class="line">git config --global http.https://github.com.proxy socks5://127.0.0.1:1086</span><br><span class="line">git config --global https.https://github.com.proxy socks5://127.0.0.1:1086</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> http协议，1081端口修改成自己的本地代理端口</span></span><br><span class="line">git config --global http.https://github.com.proxy https://127.0.0.1:1086</span><br><span class="line">git config --global https.https://github.com.proxy https://127.0.0.1:1086</span><br></pre></td></tr></table></figure>
+
+<p>这样一来，GitHub流量就能走代理了，速度能上1M/s。</p>
+]]></content>
+      <tags>
+        <tag>技巧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第一篇文章</title>
+    <url>/2020/02/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<p>总算是搭好了自己的Blog。</p>
+<p>其实本对服务器啊、网站啊、博客这些不是很感兴趣，觉得在本地写写Markdown就够了，但放在本地似乎比较零散，也没什么动力去写，那就干脆自己搭个Blog吧，虽迟但到hh。</p>
+<p>也去搜了一些资料，琢磨以何种形式搭建Blog。对于CSDN、CNBlog之类的现成平台，我是比较抗拒的，虽然很方便，但是没有了「自己搭建的灵魂」。采用GitHub Page➕hexo，问题也很明显——麻烦，就连评论系统都需要自己倒腾。当然对于我来说，这种折腾本是一种乐趣，并不排斥（毕竟写Blog也很麻烦hh）。不止这点，诸如加载速度慢、不能随处编写文章、搜索引擎上几乎无法被搜到，这些问题我也很清楚，但我并不是想要凭此来像别人炫耀什么，我所需要的仅仅是一个可以把本地文档组织起来的平台，便于在小范围内共享知识，默默记录自己的学习历程，能做到这些就够了。</p>
+<p>从小半途而废的事情实在是太多了，希望这一次能坚持下去，能以这样一种方式和角度，给成长留下一点印记。</p>
+]]></content>
+      <tags>
+        <tag>杂记</tag>
+      </tags>
+  </entry>
+</search>
