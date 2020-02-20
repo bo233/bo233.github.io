@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>考研——从报名到录取</title>
+    <url>/2020/02/20/%E8%80%83%E7%A0%94%E2%80%94%E2%80%94%E4%BB%8E%E6%8A%A5%E5%90%8D%E5%88%B0%E5%BD%95%E5%8F%96/</url>
+    <content><![CDATA[<p>有不少的学校今天都出成绩了，最近也刚好挺关注这方面的消息，并且有很多不明白的地方，就一边梳理一边记录，有错误和疏漏的地方还望指出。</p>
+<h3 id="报名"><a href="#报名" class="headerlink" title="报名"></a>报名</h3><p>以2019年为例，考研报名分为<strong>9月的「预报名」</strong>和<strong>10月的「正式报名」</strong>。</p>
+<p><strong>预报名只针对应届生</strong>，旨在减少集中报名时的拥挤。虽然不是必须要进行预报名，但为了防止正式报名时系统挤不上去，还是应该报一下。<strong>如果预报名信息确认无误并不需要改动，正式报名时可以不报</strong>。</p>
+<p>不同于高考，<strong>考研只能报名一所学校</strong>。</p>
+<a id="more"></a>
+
+
+
+<h3 id="初试"><a href="#初试" class="headerlink" title="初试"></a>初试</h3><h4 id="国家线"><a href="#国家线" class="headerlink" title="国家线"></a>国家线</h4><p>这是进入复试的最最基本要求，必须要过，大概类似于一本线。每个一级学科都会有一条分数线，软工属于「工学」，计科属于「工学」和「理学」（不过这好像不重要）。同时根据地区的不同，还分为A、B两类，但江苏是在A类中的，感兴趣可查看<a href="https://baike.baidu.com/item/%E8%80%83%E7%A0%94%E5%9B%BD%E5%AE%B6%E7%BA%BF" target="_blank" rel="noopener">百度百科</a>。工学近几年A类分数线如下，要注意<strong>单科成绩也要过线</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="center">年份</th>
+<th align="center">总分</th>
+<th align="center">政治、英语</th>
+<th align="center">数学、专业课</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">2020</td>
+<td align="center">—</td>
+<td align="center">—</td>
+<td align="center">—</td>
+</tr>
+<tr>
+<td align="center">2019</td>
+<td align="center">270</td>
+<td align="center">39</td>
+<td align="center">59</td>
+</tr>
+<tr>
+<td align="center">2018</td>
+<td align="center">260</td>
+<td align="center">34</td>
+<td align="center">51</td>
+</tr>
+<tr>
+<td align="center">2017</td>
+<td align="center">265</td>
+<td align="center">35</td>
+<td align="center">53</td>
+</tr>
+<tr>
+<td align="center">2016</td>
+<td align="center">265</td>
+<td align="center">36</td>
+<td align="center">54</td>
+</tr>
+<tr>
+<td align="center">2015</td>
+<td align="center">280</td>
+<td align="center">38</td>
+<td align="center">57</td>
+</tr>
+</tbody></table>
+<h4 id="自划线"><a href="#自划线" class="headerlink" title="自划线"></a>自划线</h4><p>34所学校（北大、清华等“至尊985”）可自主确定分数线来<strong>代替国家线</strong>，这似乎和下面的学校线差别不大，令人费解，好在和我没有太大关系。</p>
+<h4 id="学校线"><a href="#学校线" class="headerlink" title="学校线"></a>学校线</h4><p>这就是非常关键的一条线了，只有过了这条线才能参加复试。不过由于专业课多为学校自主命题（408除外），在学校之间比较分数是没有太大意义的。</p>
+<p>顺便说一下，<strong>初试出成绩的时候，同时会显示专业排名</strong>。</p>
+<h3 id="复试"><a href="#复试" class="headerlink" title="复试"></a>复试</h3><p>复试目前比较遥远，在此不过多考虑。注意一点，<strong>面试的时候对这个学校这个专业要有一定了解</strong>。</p>
+<h3 id="调剂"><a href="#调剂" class="headerlink" title="调剂"></a>调剂</h3><p>首先强调，<strong>调剂基本上是都没听过的学校</strong>（学姐原话），所以目标学校最好稳一点。如果不得已走到这一步，那也要注意以下几点：</p>
+<ul>
+<li><p>调剂现在是<strong>和复试同期进行</strong>的</p>
+</li>
+<li><p>调剂就看有哪些学校是有空缺名额，所以一定要<strong>趁早</strong>，觉得不稳，出复试线前后就可以去网站申请调剂了（祝愿大家都稳稳的）</p>
+</li>
+<li><p>专业课不同对调剂影响不大，主要看分数</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>考研</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C风格字符串 &amp; string</title>
     <url>/2020/02/19/C%E9%A3%8E%E6%A0%BC%E5%AD%97%E7%AC%A6%E4%B8%B2-string/</url>
     <content><![CDATA[<p>先开个坑，有空再补。</p>
@@ -95,7 +171,7 @@
   <entry>
     <title>小课堂01-基础篇1</title>
     <url>/2020/02/19/%E5%B0%8F%E8%AF%BE%E5%A0%8201-%E5%9F%BA%E7%A1%80%E7%AF%871/</url>
-    <content><![CDATA[<p><em>“小课堂”系列旨在针对蓝桥杯等比赛、考试进行快速入门，旨在帮助「学过但记忆模糊」的同学快速唤醒脑海中的知识。</em></p>
+    <content><![CDATA[<p><em>“小课堂”系列旨在针对蓝桥杯等比赛、考试进行快速入门，以及帮助「学过但记忆模糊」的同学快速唤醒脑海中的知识。</em></p>
 <p><em>注意事项：</em><br><em>1.推荐使用 <a href="https://sourceforge.net/projects/orwelldevcpp/" target="_blank" rel="noopener">Dev-C++ 4.9</a> 或 <a href="https://pan.baidu.com/s/1cJEgCzmVXx-tfyCokkU93w" target="_blank" rel="noopener">Dev-C++ 5.4</a> （蓝桥杯使用此IDE），不推荐使用 Visual Studio。</em><br><em>2.推荐参考资料：<a href="https://www.runoob.com/cplusplus/cpp-tutorial.html" target="_blank" rel="noopener">菜鸟教程</a> （系统、详细的教程，可作为补充学习），CSDN、CnBlog（有什么问题可以搜了看这上面的解答）</em><br><em>3.教程所讲内容应全部掌握，记在脑中</em><br><em>4.课程中的题目务必完成</em></p>
 <a id="more"></a>
 
