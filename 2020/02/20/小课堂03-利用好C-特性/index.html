@@ -20,23 +20,21 @@
     var CONFIG = {"hostname":"bo233.top","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="无论是访问GitHub还是用 git 来克隆仓库，由于种种原因，速度都感人的不行，最头疼的是就算开了全局代理，用处似乎也不大。花了一些时间，在网上找到了解决办法。">
+  <meta name="description" content="C++在竞赛上用的很多，它运行效率很高，并且不乏一些实用的标准库，这一章就来讲讲C++中竞赛常用的“特性”。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GitHub加速">
-<meta property="og:url" content="http://bo233.top/2020/02/18/GitHub%E5%8A%A0%E9%80%9F/index.html">
+<meta property="og:title" content="小课堂03-利用好C++特性">
+<meta property="og:url" content="http://bo233.top/2020/02/20/%E5%B0%8F%E8%AF%BE%E5%A0%8203-%E5%88%A9%E7%94%A8%E5%A5%BDC-%E7%89%B9%E6%80%A7/index.html">
 <meta property="og:site_name" content="Bo233&#39;s Blog">
-<meta property="og:description" content="无论是访问GitHub还是用 git 来克隆仓库，由于种种原因，速度都感人的不行，最头疼的是就算开了全局代理，用处似乎也不大。花了一些时间，在网上找到了解决办法。">
+<meta property="og:description" content="C++在竞赛上用的很多，它运行效率很高，并且不乏一些实用的标准库，这一章就来讲讲C++中竞赛常用的“特性”。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/0082zybpgy1gc0xole0c3j30qa08uq5m.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/0082zybpgy1gc0xsar00yj30qg0gm418.jpg">
-<meta property="article:published_time" content="2020-02-18T14:33:33.000Z">
-<meta property="article:modified_time" content="2020-02-20T14:54:40.209Z">
+<meta property="article:published_time" content="2020-02-20T15:26:30.000Z">
+<meta property="article:modified_time" content="2020-02-20T15:54:54.988Z">
 <meta property="article:author" content="bo233">
-<meta property="article:tag" content="技巧">
+<meta property="article:tag" content="竞赛">
+<meta property="article:tag" content="bo233小课堂">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/0082zybpgy1gc0xole0c3j30qa08uq5m.jpg">
 
-<link rel="canonical" href="http://bo233.top/2020/02/18/GitHub%E5%8A%A0%E9%80%9F/">
+<link rel="canonical" href="http://bo233.top/2020/02/20/%E5%B0%8F%E8%AF%BE%E5%A0%8203-%E5%88%A9%E7%94%A8%E5%A5%BDC-%E7%89%B9%E6%80%A7/">
 
 
 <script id="page-configurations">
@@ -48,7 +46,7 @@
   };
 </script>
 
-  <title>GitHub加速 | Bo233's Blog</title>
+  <title>小课堂03-利用好C++特性 | Bo233's Blog</title>
   
 
 
@@ -184,7 +182,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bo233.top/2020/02/18/GitHub%E5%8A%A0%E9%80%9F/">
+    <link itemprop="mainEntityOfPage" href="http://bo233.top/2020/02/20/%E5%B0%8F%E8%AF%BE%E5%A0%8203-%E5%88%A9%E7%94%A8%E5%A5%BDC-%E7%89%B9%E6%80%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -197,7 +195,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          GitHub加速
+          小课堂03-利用好C++特性
         </h1>
 
         <div class="post-meta">
@@ -206,16 +204,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-02-18 22:33:33" itemprop="dateCreated datePublished" datetime="2020-02-18T22:33:33+08:00">2020-02-18</time>
+              <time title="创建时间：2020-02-20 23:26:30 / 修改时间：23:54:54" itemprop="dateCreated datePublished" datetime="2020-02-20T23:26:30+08:00">2020-02-20</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-20 22:54:40" itemprop="dateModified" datetime="2020-02-20T22:54:40+08:00">2020-02-20</time>
-              </span>
 
           
 
@@ -228,20 +220,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>无论是访问GitHub还是用 git 来克隆仓库，由于种种原因，速度都感人的不行，最头疼的是就算开了全局代理，用处似乎也不大。花了一些时间，在网上找到了解决办法。</p>
+        <p>C++在竞赛上用的很多，它运行效率很高，并且不乏一些实用的标准库，这一章就来讲讲C++中竞赛常用的“特性”。</p>
 <a id="more"></a>
 
-<h3 id="GitHub网站访问加速"><a href="#GitHub网站访问加速" class="headerlink" title="GitHub网站访问加速"></a>GitHub网站访问加速</h3><p>原本只是在 PAC 列表里加上了github.com，后来发现由于GitHub还需要用到githubxxx.com的链接，便又加入 github*.com，速度一下就上来了。</p>
-<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc0xole0c3j30qa08uq5m.jpg" alt="image-20200218224159818" style="zoom:50%;" />
+<h3 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h3><p><strong>向量</strong>，可将其简单理解为动态数组，元素按顺序存储于其中。用法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;     // 头文件</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;  <span class="comment">// 命名空间不能忘</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1;        <span class="comment">// 创建一个空向量v1，尖括号内的类型指定了元素的类型，可以是普通类型、struct或class</span></span><br><span class="line">  <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(<span class="number">10</span>)</span></span>;    <span class="comment">// 创建一个元素个数为10的向量v2</span></span><br><span class="line">  <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">v3</span><span class="params">(<span class="number">10</span>,<span class="number">0</span>)</span></span>;  <span class="comment">// 创造一个元素个数为10，值均为0的向量v3</span></span><br><span class="line">  </span><br><span class="line">  v1.push_back(<span class="number">10</span>);      <span class="comment">// 在向量的最后添加数据10</span></span><br><span class="line">  v3.pop_back();         <span class="comment">// 去掉向量的最后一个数据</span></span><br><span class="line">  v2.size();             <span class="comment">// 返回v2所含元素的个数</span></span><br><span class="line">  v2[<span class="number">2</span>];                 <span class="comment">// 访问v2中下标为2的元素</span></span><br><span class="line">  </span><br><span class="line">  v1.clear();            <span class="comment">// 清空v1</span></span><br><span class="line">  v1.empty()</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="Git-克隆-GitHub-仓库加速"><a href="#Git-克隆-GitHub-仓库加速" class="headerlink" title="Git 克隆 GitHub 仓库加速"></a>Git 克隆 GitHub 仓库加速</h3><p>然鹅上述方法对 git 是没用的。首先先找到代理的监听端口，一般都是1080+，我这里是1086。</p>
-<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc0xsar00yj30qg0gm418.jpg" alt="image-20200218224534060" style="zoom:50%;" />
 
-<p>然后在终端中输入：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> socks5协议，1086端口修改成自己的本地代理端口</span></span><br><span class="line">git config --global http.https://github.com.proxy socks5://127.0.0.1:1086</span><br><span class="line">git config --global https.https://github.com.proxy socks5://127.0.0.1:1086</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> http协议，1086端口修改成自己的本地代理端口</span></span><br><span class="line">git config --global http.https://github.com.proxy https://127.0.0.1:1086</span><br><span class="line">git config --global https.https://github.com.proxy https://127.0.0.1:1086</span><br></pre></td></tr></table></figure>
 
-<p>这样一来，GitHub流量就能走代理了，速度能上1M/s。</p>
 
+
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><h3 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h3><h3 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h3><h3 id="map-unsorted-map"><a href="#map-unsorted-map" class="headerlink" title="map/unsorted_map"></a>map/unsorted_map</h3><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3>
     </div>
 
     
@@ -256,7 +245,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://bo233.top/2020/02/18/GitHub%E5%8A%A0%E9%80%9F/" title="GitHub加速">http://bo233.top/2020/02/18/GitHub加速/</a>
+    <a href="http://bo233.top/2020/02/20/%E5%B0%8F%E8%AF%BE%E5%A0%8203-%E5%88%A9%E7%94%A8%E5%A5%BDC-%E7%89%B9%E6%80%A7/" title="小课堂03-利用好C++特性">http://bo233.top/2020/02/20/小课堂03-利用好C-特性/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -267,7 +256,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%8A%80%E5%B7%A7/" rel="tag"># 技巧</a>
+              <a href="/tags/%E7%AB%9E%E8%B5%9B/" rel="tag"># 竞赛</a>
+              <a href="/tags/bo233%E5%B0%8F%E8%AF%BE%E5%A0%82/" rel="tag"># bo233小课堂</a>
           </div>
 
         
@@ -276,13 +266,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" rel="prev" title="第一篇文章">
-      <i class="fa fa-chevron-left"></i> 第一篇文章
+    <a href="/2020/02/20/%E8%80%83%E7%A0%94%E2%80%94%E2%80%94%E4%BB%8E%E6%8A%A5%E5%90%8D%E5%88%B0%E5%BD%95%E5%8F%96/" rel="prev" title="考研——从报名到录取">
+      <i class="fa fa-chevron-left"></i> 考研——从报名到录取
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/02/19/POJ1195-Mobile-phones/" rel="next" title="POJ1195-Mobile phones">
-      POJ1195-Mobile phones <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -343,7 +330,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub网站访问加速"><span class="nav-number">1.</span> <span class="nav-text">GitHub网站访问加速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-克隆-GitHub-仓库加速"><span class="nav-number">2.</span> <span class="nav-text">Git 克隆 GitHub 仓库加速</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#vector"><span class="nav-number">1.</span> <span class="nav-text">vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">2.</span> <span class="nav-text">sort()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set"><span class="nav-number">3.</span> <span class="nav-text">set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stack"><span class="nav-number">4.</span> <span class="nav-text">stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#queue"><span class="nav-number">5.</span> <span class="nav-text">queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map-unsorted-map"><span class="nav-number">6.</span> <span class="nav-text">map&#x2F;unsorted_map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用"><span class="nav-number">7.</span> <span class="nav-text">引用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -488,7 +475,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'gitment-comments',
       owner       : 'bo233',
       admin       : ['bo233'],
-      id          : 'fed8416c662796298800c3e91bcec25d',
+      id          : '0d96f287cb532b5b052635d14126a61d',
         language: 'zh-CN',
       distractionFreeMode: false
     });
