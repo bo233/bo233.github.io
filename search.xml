@@ -1,18 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>蓝桥杯PREV03-带分数</title>
+    <url>/2020/02/24/%E8%93%9D%E6%A1%A5%E6%9D%AFPREV03-%E5%B8%A6%E5%88%86%E6%95%B0/</url>
+    <content><![CDATA[<p><a href="http://lx.lanqiao.cn/problem.page?gpid=T26" target="_blank" rel="noopener">题目链接</a></p>
+<h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>一个数 n 可表示为 n = a + c / b ，其中a、b、c中数字1-9分别出现且只出现一次，统计输入值 n 的全部表示方式的数量。</p>
+<a id="more"></a>
+
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>由于要求1-9每个数字都要出现一次，那很容易想到采用<strong>全排列</strong>。关键在于，对于每一种排列，该如何从中选取 a、b、c 三个数。</p>
+<p>首先可以确定的是 a&lt;n ，那 a&gt;=n的情况可以一并排除，其次由于 a、b、c、n都是整数，那么 c/a 也要是整数，及 c%b=0 （在这一条件中，已经隐含了 c&gt;=b），这样一来结合剪枝，就能很容易得到答案。</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> nums[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;<span class="number">10</span>; i++)</span><br><span class="line">        nums[i]=i;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;<span class="number">8</span>; i++)&#123; <span class="comment">// a</span></span><br><span class="line">            a=a*<span class="number">10</span>+nums[i];</span><br><span class="line">            <span class="keyword">if</span>(a&gt;=n)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">int</span> c=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;<span class="number">9</span>; j++)&#123; <span class="comment">// c</span></span><br><span class="line">                c=c*<span class="number">10</span>+nums[j];</span><br><span class="line">                <span class="keyword">int</span> b=<span class="number">0</span>; <span class="comment">// b</span></span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=j+<span class="number">1</span>; k&lt;<span class="number">10</span>; k++)</span><br><span class="line">                    b=b*<span class="number">10</span>+nums[k];</span><br><span class="line">                <span class="keyword">if</span>(c%b!=<span class="number">0</span>)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>(a+c/b==n)</span><br><span class="line">                    ans++;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">while</span>(next_permutation(nums+<span class="number">1</span>, nums+<span class="number">10</span>));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>碰到好几个坑，能反应出不少知识体系和做题思路的问题：</p>
+<ul>
+<li>原本把 <code>a=a*10+nums[i]</code> 写成了 <code>a*=10+nums[i]</code> ，以为这两者没有区别，但实际上后者等同于 <code>a=a*(10+nums[i])</code> ， <code>*=</code> 的优先级比较低。</li>
+<li>由于 c&gt;b 的一个充分条件是 c 的长度大于 b ，所以一开始直接在迭代 c 的代码中直接让 c 的长度大于 b ，及写成了 <code>for(int j=i+ceil((9+i)/2.0); j&lt;9; j++)</code> ，但过多的条件使得结果出现了错误。在能选择简单明了的情况下应当避免选择复杂。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>算法&amp;数据结构</tag>
+        <tag>竞赛</tag>
+        <tag>全排列</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>POJ2352-Stars</title>
     <url>/2020/02/22/POJ2352-Stars/</url>
     <content><![CDATA[<p><a href="http://poj.org/problem?id=2352" target="_blank" rel="noopener">题目链接</a></p>
 <h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>给输入星星的坐标（y递增，若y相等，x递增），每个星星都有一个等级，规定它的等级就是在它左下方的星星的个数。输入所有星星后，依次输出等级为0到n-1的星星的个数。</p>
+<a id="more"></a>
+
 <h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>乍一看很茫然，仔细观察输入规律就能发现，是在x的维度上求逆元数。</p>
 <h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN=<span class="number">32005</span>;</span><br><span class="line"><span class="keyword">int</span> tree[MAXN];</span><br><span class="line"><span class="keyword">int</span> level[MAXN],n;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) x&amp;-(x)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(x&lt;=MAXN)&#123;     <span class="comment">//⚠️注意，由于没有离散化，x要小于等于MAXN而非n</span></span><br><span class="line">        tree[x]+=d;</span><br><span class="line">        x+=lowbit(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getsum</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(x&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        sum+=tree[x];</span><br><span class="line">        x-=lowbit(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">        x++;</span><br><span class="line">        level[getsum(x)]++;</span><br><span class="line">        add(x, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// id[i]=i;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, level[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>一开始题目还读错了，没看懂输入的规律（逃，虽然已经接触了一段时间树状数组了，但不能把思维固定在最基础的题型上，要加强举一反三的能力。</p>
 ]]></content>
       <tags>
-        <tag>竞赛</tag>
         <tag>算法&amp;数据结构</tag>
+        <tag>竞赛</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -203,8 +228,8 @@
 
 ]]></content>
       <tags>
-        <tag>竞赛</tag>
         <tag>C++</tag>
+        <tag>竞赛</tag>
       </tags>
   </entry>
   <entry>
@@ -327,8 +352,8 @@
 <p>树状数组要求输入为<strong>正数</strong>，如果输入的数中有小于等于0的情况，要转换为正数。</p>
 ]]></content>
       <tags>
-        <tag>竞赛</tag>
         <tag>算法&amp;数据结构</tag>
+        <tag>竞赛</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -353,8 +378,8 @@
 <h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>需要注意的点已经在代码中标注出来，还是要牢记，<strong>树状数组的下标从1开始</strong>，这一点千万不能忘记。在计算区域和的时候也要注意，<code>getsum(r,t)-getsum(l-1,t)-getsum(r,b-1)+getsum(l-1,b-1)</code>，哪里要减1哪里不需要，要想明白。</p>
 ]]></content>
       <tags>
-        <tag>竞赛</tag>
         <tag>算法&amp;数据结构</tag>
+        <tag>竞赛</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
