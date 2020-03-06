@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>OneDrive 加速</title>
+    <url>/2020/03/06/OneDrive-%E5%8A%A0%E9%80%9F/</url>
+    <content><![CDATA[<p><del>好久没写了，来水一篇</del></p>
+<a id="more"></a>
+
+<p>因为要在各种设备上使用 Microsoft Office ，所以很早前就订阅了 Office 365 ，但由于 OneDrive 实在迷，就一直没用。考虑到 iCloud Drive 上的50G实在不大够用，就用重新把 OneDrive 下回来了，加速了以后文件也都基本能秒开。</p>
+<p>找到了<a href="https://www.zhangxuhu.com/archives/158.html" target="_blank" rel="noopener">这篇文章</a>，提供了多种方法加速，同时也滋瓷一下这个 <a href="https://github.com/Marukon/Microsoft-Hosts" target="_blank" rel="noopener">repo</a> 。由于 host 会经常更新，我只把下面这一串（<a href="https://raw.githubusercontent.com/Marukon/Microsoft-Hosts/master/Onedrive%20PAC" target="_blank" rel="noopener">链接</a>）扔进了飞机的 PAC 。当然，这么一改得注意一下飞机的流量够不够用。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">13.107.42.12,</span><br><span class="line">13.107.136.9,</span><br><span class="line">52.114.158.92,</span><br><span class="line">*live.com*,</span><br><span class="line">*live.net*,</span><br><span class="line">*microsoft.com*,</span><br><span class="line">*office.com*,</span><br><span class="line">*office.net*,</span><br><span class="line">*windows.com*,</span><br><span class="line">*windows.net*,</span><br><span class="line">*sharepoint.com*,</span><br><span class="line">*office365.com*,</span><br><span class="line">*officeppe.net*,</span><br><span class="line">*skype.com*,</span><br><span class="line">*onedrive.com*,</span><br><span class="line">*msocsp.com*,</span><br><span class="line">*msauthimages.net*,</span><br><span class="line">*msauth.net*,</span><br><span class="line">*microsoftonline.com*,</span><br><span class="line">*msn.com*,</span><br><span class="line">*onenote.com*,</span><br><span class="line">*onenote.net*,</span><br><span class="line">*1drv.com*</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>技巧</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>蓝桥杯PREV09-大臣的旅费</title>
     <url>/2020/02/27/%E8%93%9D%E6%A1%A5%E6%9D%AFPREV09-%E5%A4%A7%E8%87%A3%E7%9A%84%E6%97%85%E8%B4%B9/</url>
     <content><![CDATA[<p><a href="http://lx.lanqiao.cn/problem.page?gpid=T32" target="_blank" rel="noopener">题目链接</a></p>
@@ -21,8 +36,8 @@
 <h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>原本是以每一个结点为起点，做 DFS ，然后挑出最长路径，果断超时。然后看到有关于“树的直径”以及其快速求解的算法，才得以解决，说明还是有很多没接触过的基础性知识。以及 DFS 写起来真方便（。</p>
 ]]></content>
       <tags>
-        <tag>竞赛</tag>
         <tag>算法&amp;数据结构</tag>
+        <tag>竞赛</tag>
         <tag>树</tag>
       </tags>
   </entry>
@@ -46,8 +61,8 @@
 <p>这么写虽然能过，但是有问题的，如果 2a &lt; b，那么会漏掉 [a, b] 之间能表示的数，所以还是应该像完整代码中那样顺推。</p>
 ]]></content>
       <tags>
-        <tag>竞赛</tag>
         <tag>算法&amp;数据结构</tag>
+        <tag>竞赛</tag>
         <tag>动态规划</tag>
       </tags>
   </entry>
@@ -96,8 +111,8 @@
 <h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>本来想用bfs的，但似乎写起来比dfs麻烦，看来还是应该优先考虑dfs。</p>
 ]]></content>
       <tags>
-        <tag>竞赛</tag>
         <tag>算法&amp;数据结构</tag>
+        <tag>竞赛</tag>
         <tag>搜索</tag>
       </tags>
   </entry>
@@ -137,8 +152,8 @@
 </ul>
 ]]></content>
       <tags>
-        <tag>竞赛</tag>
         <tag>算法&amp;数据结构</tag>
+        <tag>竞赛</tag>
         <tag>搜索</tag>
       </tags>
   </entry>
@@ -155,8 +170,8 @@
 <h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>一开始题目还读错了，没看懂输入的规律（逃，虽然已经接触了一段时间树状数组了，但不能把思维固定在最基础的题型上，要加强举一反三的能力。</p>
 ]]></content>
       <tags>
-        <tag>竞赛</tag>
         <tag>算法&amp;数据结构</tag>
+        <tag>竞赛</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -347,8 +362,8 @@
 
 ]]></content>
       <tags>
-        <tag>竞赛</tag>
         <tag>C++</tag>
+        <tag>竞赛</tag>
       </tags>
   </entry>
   <entry>
@@ -471,8 +486,8 @@
 <p>树状数组要求输入为<strong>正数</strong>，如果输入的数中有小于等于0的情况，要转换为正数。</p>
 ]]></content>
       <tags>
-        <tag>竞赛</tag>
         <tag>算法&amp;数据结构</tag>
+        <tag>竞赛</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -497,8 +512,8 @@
 <h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>需要注意的点已经在代码中标注出来，还是要牢记，<strong>树状数组的下标从1开始</strong>，这一点千万不能忘记。在计算区域和的时候也要注意，<code>getsum(r,t)-getsum(l-1,t)-getsum(r,b-1)+getsum(l-1,b-1)</code>，哪里要减1哪里不需要，要想明白。</p>
 ]]></content>
       <tags>
-        <tag>竞赛</tag>
         <tag>算法&amp;数据结构</tag>
+        <tag>竞赛</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
