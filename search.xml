@@ -1,0 +1,1459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>常用代码模板1——基础算法 </title>
+    <url>/2021/01/20/%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF1%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>非常好用的算法版子。</p>
+<a id="more"></a>
+
+<p>本文转自<a href="https://www.acwing.com/blog/content/277/" target="_blank" rel="noopener">https://www.acwing.com/blog/content/277/</a></p>
+<h4 id="快速排序算法模板-——-模板题-AcWing-785-快速排序"><a href="#快速排序算法模板-——-模板题-AcWing-785-快速排序" class="headerlink" title="快速排序算法模板 —— 模板题 AcWing 785. 快速排序"></a>快速排序算法模板 —— 模板题 AcWing 785. 快速排序</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="keyword">int</span> q[], <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &gt;= r) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> i = l - <span class="number">1</span>, j = r + <span class="number">1</span>, x = q[l + r &gt;&gt; <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span> (i &lt; j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">do</span> i ++ ; <span class="keyword">while</span> (q[i] &lt; x);</span><br><span class="line">        <span class="keyword">do</span> j -- ; <span class="keyword">while</span> (q[j] &gt; x);</span><br><span class="line">        <span class="keyword">if</span> (i &lt; j) swap(q[i], q[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    quick_sort(q, l, j), quick_sort(q, j + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="归并排序算法模板-——-模板题-AcWing-787-归并排序"><a href="#归并排序算法模板-——-模板题-AcWing-787-归并排序" class="headerlink" title="归并排序算法模板 —— 模板题 AcWing 787. 归并排序"></a>归并排序算法模板 —— 模板题 AcWing 787. 归并排序</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sort</span><span class="params">(<span class="keyword">int</span> q[], <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &gt;= r) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    merge_sort(q, l, mid);</span><br><span class="line">    merge_sort(q, mid + <span class="number">1</span>, r);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>, i = l, j = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= mid &amp;&amp; j &lt;= r)</span><br><span class="line">        <span class="keyword">if</span> (q[i] &lt;= q[j]) tmp[k ++ ] = q[i ++ ];</span><br><span class="line">        <span class="keyword">else</span> tmp[k ++ ] = q[j ++ ];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (i &lt;= mid) tmp[k ++ ] = q[i ++ ];</span><br><span class="line">    <span class="keyword">while</span> (j &lt;= r) tmp[k ++ ] = q[j ++ ];</span><br><span class="line">    <span class="keyword">for</span> (i = l, j = <span class="number">0</span>; i &lt;= r; i ++, j ++ ) q[i] = tmp[j];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="整数二分算法模板-——-模板题-AcWing-789-数的范围"><a href="#整数二分算法模板-——-模板题-AcWing-789-数的范围" class="headerlink" title="整数二分算法模板 —— 模板题 AcWing 789. 数的范围"></a>整数二分算法模板 —— 模板题 AcWing 789. 数的范围</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;<span class="comment">/* ... */</span>&#125; <span class="comment">// 检查x是否满足某种性质</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 区间[l, r]被划分成[l, mid]和[mid + 1, r]时使用：</span></span><br><span class="line"><span class="comment">// 或：更新时 r = mid</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bsearch_1</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (check(mid)) r = mid;    <span class="comment">// check()判断mid是否满足性质</span></span><br><span class="line">        <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 区间[l, r]被划分成[l, mid - 1]和[mid, r]时使用：</span></span><br><span class="line"><span class="comment">// 或：更新时 l = mid</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bsearch_2</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = l + r + <span class="number">1</span> &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (check(mid)) l = mid;</span><br><span class="line">        <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="浮点数二分算法模板-——-模板题-AcWing-790-数的三次方根"><a href="#浮点数二分算法模板-——-模板题-AcWing-790-数的三次方根" class="headerlink" title="浮点数二分算法模板 —— 模板题 AcWing 790. 数的三次方根"></a>浮点数二分算法模板 —— 模板题 AcWing 790. 数的三次方根</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">double</span> x)</span> </span>&#123;<span class="comment">/* ... */</span>&#125; <span class="comment">// 检查x是否满足某种性质</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">bsearch_3</span><span class="params">(<span class="keyword">double</span> l, <span class="keyword">double</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> eps = <span class="number">1e-6</span>;   <span class="comment">// eps 表示精度，取决于题目对精度的要求</span></span><br><span class="line">    <span class="keyword">while</span> (r - l &gt; eps)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">double</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (check(mid)) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="高精度加法-——-模板题-AcWing-791-高精度加法"><a href="#高精度加法-——-模板题-AcWing-791-高精度加法" class="headerlink" title="高精度加法 —— 模板题 AcWing 791. 高精度加法"></a>高精度加法 —— 模板题 AcWing 791. 高精度加法</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C = A + B, A &gt;= 0, B &gt;= 0</span></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">add</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;B)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (A.size() &lt; B.size()) <span class="keyword">return</span> add(B, A);</span><br><span class="line">  	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; C;</span><br><span class="line">    <span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.size(); i ++ )</span><br><span class="line">    &#123;</span><br><span class="line">        t += A[i];</span><br><span class="line">        <span class="keyword">if</span> (i &lt; B.size()) t += B[i];</span><br><span class="line">        C.push_back(t % <span class="number">10</span>);</span><br><span class="line">        t /= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (t) C.push_back(t);</span><br><span class="line">    <span class="keyword">return</span> C;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="高精度减法-——-模板题-AcWing-792-高精度减法"><a href="#高精度减法-——-模板题-AcWing-792-高精度减法" class="headerlink" title="高精度减法 —— 模板题 AcWing 792. 高精度减法"></a>高精度减法 —— 模板题 AcWing 792. 高精度减法</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C = A - B, 满足A &gt;= B, A &gt;= 0, B &gt;= 0</span></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">sub</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;B)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; C;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, t = <span class="number">0</span>; i &lt; A.size(); i ++ )</span><br><span class="line">    &#123;</span><br><span class="line">        t = A[i] - t;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; B.size()) t -= B[i];</span><br><span class="line">        C.push_back((t + <span class="number">10</span>) % <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">if</span> (t &lt; <span class="number">0</span>) t = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> t = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  	<span class="keyword">while</span> (C.size() &gt; <span class="number">1</span> &amp;&amp; C.back() == <span class="number">0</span>) C.pop_back();</span><br><span class="line">		<span class="keyword">return</span> C;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="高精度乘低精度-——-模板题-AcWing-793-高精度乘法"><a href="#高精度乘低精度-——-模板题-AcWing-793-高精度乘法" class="headerlink" title="高精度乘低精度 —— 模板题 AcWing 793. 高精度乘法"></a>高精度乘低精度 —— 模板题 AcWing 793. 高精度乘法</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C = A * b, A &gt;= 0, b &gt; 0</span></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">mul</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;A, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; C;</span><br><span class="line">    <span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.size() || t; i ++ )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; A.size()) t += A[i] * b;</span><br><span class="line">        C.push_back(t % <span class="number">10</span>);</span><br><span class="line">        t /= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (C.size() &gt; <span class="number">1</span> &amp;&amp; C.back() == <span class="number">0</span>) C.pop_back();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> C;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="高精度除以低精度-——-模板题-AcWing-794-高精度除法"><a href="#高精度除以低精度-——-模板题-AcWing-794-高精度除法" class="headerlink" title="高精度除以低精度 —— 模板题 AcWing 794. 高精度除法"></a>高精度除以低精度 —— 模板题 AcWing 794. 高精度除法</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// A / b = C ... r, A &gt;= 0, b &gt; 0</span></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">div</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;A, <span class="keyword">int</span> b, <span class="keyword">int</span> &amp;r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; C;</span><br><span class="line">    r = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = A.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i -- )</span><br><span class="line">    &#123;</span><br><span class="line">        r = r * <span class="number">10</span> + A[i];</span><br><span class="line">        C.push_back(r / b);</span><br><span class="line">        r %= b;</span><br><span class="line">    &#125;</span><br><span class="line">    reverse(C.begin(), C.end());</span><br><span class="line">    <span class="keyword">while</span> (C.size() &gt; <span class="number">1</span> &amp;&amp; C.back() == <span class="number">0</span>) C.pop_back();</span><br><span class="line">    <span class="keyword">return</span> C;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="一维前缀和-——-模板题-AcWing-795-前缀和"><a href="#一维前缀和-——-模板题-AcWing-795-前缀和" class="headerlink" title="一维前缀和 —— 模板题 AcWing 795. 前缀和"></a>一维前缀和 —— 模板题 AcWing 795. 前缀和</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">S[i] = a[<span class="number">1</span>] + a[<span class="number">2</span>] + ... a[i]</span><br><span class="line">a[l] + ... + a[r] = S[r] - S[l - <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="二维前缀和-——-模板题-AcWing-796-子矩阵的和"><a href="#二维前缀和-——-模板题-AcWing-796-子矩阵的和" class="headerlink" title="二维前缀和 —— 模板题 AcWing 796. 子矩阵的和"></a>二维前缀和 —— 模板题 AcWing 796. 子矩阵的和</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">S[i, j] = 第i行j列格子左上部分所有元素的和</span><br><span class="line">以(x1, y1)为左上角，(x2, y2)为右下角的子矩阵的和为：</span><br><span class="line">S[x2, y2] - S[x1 - <span class="number">1</span>, y2] - S[x2, y1 - <span class="number">1</span>] + S[x1 - <span class="number">1</span>, y1 - <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="一维差分-——-模板题-AcWing-797-差分"><a href="#一维差分-——-模板题-AcWing-797-差分" class="headerlink" title="一维差分 —— 模板题 AcWing 797. 差分"></a>一维差分 —— 模板题 AcWing 797. 差分</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">给区间[l, r]中的每个数加上c：B[l] += c, B[r + <span class="number">1</span>] -= c</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="二维差分-——-模板题-AcWing-798-差分矩阵"><a href="#二维差分-——-模板题-AcWing-798-差分矩阵" class="headerlink" title="二维差分 —— 模板题 AcWing 798. 差分矩阵"></a>二维差分 —— 模板题 AcWing 798. 差分矩阵</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">给以(x1, y1)为左上角，(x2, y2)为右下角的子矩阵中的所有元素加上c：</span><br><span class="line">S[x1, y1] += c, S[x2 + <span class="number">1</span>, y1] -= c, S[x1, y2 + <span class="number">1</span>] -= c, S[x2 + <span class="number">1</span>, y2 + <span class="number">1</span>] += c</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="位运算-——-模板题-AcWing-801-二进制中1的个数"><a href="#位运算-——-模板题-AcWing-801-二进制中1的个数" class="headerlink" title="位运算 —— 模板题 AcWing 801. 二进制中1的个数"></a>位运算 —— 模板题 AcWing 801. 二进制中1的个数</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">求n的第k位数字: n &gt;&gt; k &amp; <span class="number">1</span></span><br><span class="line">返回n的最后一位<span class="number">1</span>：lowbit(n) = n &amp; -n</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="双指针算法-——-模板题-AcWIng-799-最长连续不重复子序列-AcWing-800-数组元素的目标和"><a href="#双指针算法-——-模板题-AcWIng-799-最长连续不重复子序列-AcWing-800-数组元素的目标和" class="headerlink" title="双指针算法 —— 模板题 AcWIng 799. 最长连续不重复子序列, AcWing 800. 数组元素的目标和"></a>双指针算法 —— 模板题 AcWIng 799. 最长连续不重复子序列, AcWing 800. 数组元素的目标和</h4><pre><code>for (int i = 0, j = 0; i &lt; n; i ++ )
+{
+    while (j &lt; i &amp;&amp; check(i, j)) j ++ ;
+        // 具体问题的逻辑
+}
+常见问题分类：
+    (1) 对于一个序列，用两个指针维护一段区间
+    (2) 对于两个序列，维护某种次序，比如归并排序中合并两个有序序列的操作</code></pre><h4 id="离散化-——-模板题-AcWing-802-区间和"><a href="#离散化-——-模板题-AcWing-802-区间和" class="headerlink" title="离散化 —— 模板题 AcWing 802. 区间和"></a>离散化 —— 模板题 AcWing 802. 区间和</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; alls; <span class="comment">// 存储所有待离散化的值</span></span><br><span class="line">sort(alls.begin(), alls.end()); <span class="comment">// 将所有值排序</span></span><br><span class="line">alls.erase(unique(alls.begin(), alls.end()), alls.end());   <span class="comment">// 去掉重复元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 二分求出x对应的离散化的值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> <span class="comment">// 找到第一个大于等于x的位置</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">0</span>, r = alls.size() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (alls[mid] &gt;= x) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r + <span class="number">1</span>; <span class="comment">// 映射到1, 2, ...n</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="区间合并-——-模板题-AcWing-803-区间合并"><a href="#区间合并-——-模板题-AcWing-803-区间合并" class="headerlink" title="区间合并 —— 模板题 AcWing 803. 区间合并"></a>区间合并 —— 模板题 AcWing 803. 区间合并</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将所有存在交集的区间合并</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="built_in">vector</span>&lt;PII&gt; &amp;segs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;PII&gt; res;</span><br><span class="line">    sort(segs.begin(), segs.end());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> st = <span class="number">-2e9</span>, ed = <span class="number">-2e9</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> seg : segs)</span><br><span class="line">        <span class="keyword">if</span> (ed &lt; seg.first)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (st != <span class="number">-2e9</span>) res.push_back(&#123;st, ed&#125;);</span><br><span class="line">            st = seg.first, ed = seg.second;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> ed = max(ed, seg.second);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (st != <span class="number">-2e9</span>) res.push_back(&#123;st, ed&#125;);</span><br><span class="line"></span><br><span class="line">    segs = res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>竞赛</tag>
+        <tag>算法-数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【转载】Tmux 使用手册</title>
+    <url>/2020/03/27/Tmux-%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<p>文中所述的 Tmux 使用方法和技巧十分详细，足以满足大多数情况下的需求。</p>
+<a id="more"></a>
+
+<blockquote>
+<p>本文作者：<a href="https://github.com/Louiszhai" target="_blank" rel="noopener">louis</a></p>
+<p>本文转自：<a href="http://louiszhai.github.io/2017/09/30/tmux/" target="_blank" rel="noopener">http://louiszhai.github.io/2017/09/30/tmux/</a></p>
+<p>转载请注明原作者和原出处。</p>
+</blockquote>
+<h3 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h3><p>我一直信奉简洁至上的原则，桌面窗口的数量越少，我的心情就越放松，开发的效率也就越高。反之，杂乱的桌面，暴涨的Chrome tab数量，或是无数的终端窗口，它们会逐步侵占我的注意力，分散我的思维，最终令我难以专注。因此桌面上我很少放文件，使用Chrome时常点 <a href="https://chrome.google.com/webstore/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall" target="_blank" rel="noopener">OneTab</a> 回收标签页，切进终端时使用tmux管理窗口。</p>
+<p>那么，有没有可能开机后不需要任何操作，本地的十几种web开发服务就自动运行？当然我不希望连续弹出十几个窗口或是tab，我需要的是静默无感知的启用服务，然后还能快速地进入到现场进行操作，web服务运行时不占据终端窗口，关闭iTem2后操作现场不会被销毁。诸如此类，tmux都能实现，除了这些，tmux还能做得更多更好。</p>
+<p>到目前为止，tmux帮助我两年有余，它带给我许多惊喜。独乐不如众乐，愿你也能一同享受tmux带来的快乐。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>tmux是一款优秀的终端复用软件，它比Screen更加强大，至于如何强大，网上有大量的文章讨论了这点，本文不再重复。tmux之所以受人们喜爱，主要得益于以下三处功能：</p>
+<ul>
+<li>丝滑分屏（split），虽然iTem2也提供了横向和竖向分屏功能，但这种分屏功能非常拙劣，完全等同于屏幕新开一个窗口，新开的pane不会自动进入到当前目录，也没有记住当前登录状态。这意味着如果我ssh进入到远程服务器时，iTem2新开的pane中，我依然要重新走一遍ssh登录的老路（omg）。tmux就不会这样，tmux窗口中，新开的pane，默认进入到之前的路径，如果是ssh连接，登录状态也依旧保持着，如此一来，我就可以随意的增删pane，这种灵活性，好处不言而喻。</li>
+<li>保护现场（attach），即使命令行的工作只进行到一半，关闭终端后还可以重新进入到操作现场，继续工作。对于ssh远程连接而言，即使网络不稳定也没有关系，掉线后重新连接，可以直奔现场，之前运行中的任务，依旧在跑，就好像从来没有离开过一样；特别是在远程服务器上运行耗时的任务，tmux可以帮你一直保持住会话。如此一来，你就可以随时随地放心地进行移动办公，只要你附近的计算机装有tmux（没有你也可以花几分钟装一个），你就能继续刚才的工作。</li>
+<li>会话共享（适用于结对编程或远程教学），将 tmux 会话的地址分享给他人，这样他们就可以通过 SSH 接入该会话。如果你要给同事演示远程服务器的操作，他不必直勾勾地盯着你的屏幕，借助tmux，他完全可以进入到你的会话，然后静静地看着他桌面上你风骚的键盘走位，只要他愿意，甚至还可以录个屏。</li>
+</ul>
+<p>以上，只是主要功能，更多功能还在后头，接下来我将详细地介绍tmux的使用技巧。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>首先安装之。</p>
+<p>在Mac中安装：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 先安装Homebrew，有则跳过</span><br><span class="line">ruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install)&quot;</span><br><span class="line"># 安装tmux</span><br><span class="line">brew install tmux</span><br></pre></td></tr></table></figure>
+
+<p>在Linux中安装：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install tmux</span><br></pre></td></tr></table></figure>
+
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>开始之前，我们先了解下基本概念：</p>
+<p>tmux采用C/S模型构建，输入tmux命令就相当于开启了一个服务器，此时默认将新建一个会话，然后会话中默认新建一个窗口，窗口中默认新建一个面板。会话、窗口、面板之间的联系如下：</p>
+<p>一个tmux <code>session</code>（会话）可以包含多个<code>window</code>（窗口），窗口默认充满会话界面，因此这些窗口中可以运行相关性不大的任务。</p>
+<p>一个<code>window</code>又可以包含多个<code>pane</code>（面板），窗口下的面板，都处于同一界面下，这些面板适合运行相关性高的任务，以便同时观察到它们的运行情况。</p>
+<p><a href="http://louiszhai.github.io/docImages/tmux01.png" target="_blank" rel="noopener"><img src="http://louiszhai.github.io/docImages/tmux01.png" alt="基本概念"></a></p>
+<h3 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h3><h4 id="新建会话"><a href="#新建会话" class="headerlink" title="新建会话"></a>新建会话</h4><p>新建一个tmux session非常简单，语法为<code>tmux new -s session-name</code>，也可以简写为<code>tmux</code>，为了方便管理，建议指定会话名称，如下。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux # 新建一个无名称的会话</span><br><span class="line">tmux new -s demo # 新建一个名称为demo的会话</span><br></pre></td></tr></table></figure>
+
+<h4 id="断开当前会话"><a href="#断开当前会话" class="headerlink" title="断开当前会话"></a>断开当前会话</h4><p>会话中操作了一段时间，我希望断开会话同时下次还能接着用，怎么做？此时可以使用detach命令。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux detach # 断开当前会话，会话在后台运行</span><br></pre></td></tr></table></figure>
+
+<p>也许你觉得这个太麻烦了，是的，tmux的会话中，我们已经可以使用tmux快捷键了。使用快捷键组合<code>Ctrl+b</code> + <code>d</code>，三次按键就可以断开当前会话。</p>
+<h4 id="进入之前的会话"><a href="#进入之前的会话" class="headerlink" title="进入之前的会话"></a>进入之前的会话</h4><p>断开会话后，想要接着上次留下的现场继续工作，就要使用到tmux的attach命令了，语法为<code>tmux attach-session -t session-name</code>，可简写为<code>tmux a -t session-name</code> 或 <code>tmux a</code>。通常我们使用如下两种方式之一即可：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux a # 默认进入第一个会话</span><br><span class="line">tmux a -t demo # 进入到名称为demo的会话</span><br></pre></td></tr></table></figure>
+
+<h4 id="关闭会话"><a href="#关闭会话" class="headerlink" title="关闭会话"></a>关闭会话</h4><p>会话的使命完成后，一定是要关闭的。我们可以使用tmux的kill命令，kill命令有<code>kill-pane</code>、<code>kill-server</code>、<code>kill-session</code> 和 <code>kill-window</code>共四种，其中<code>kill-session</code>的语法为<code>tmux kill-session -t session-name</code>。如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux kill-session -t demo # 关闭demo会话</span><br><span class="line">tmux kill-server # 关闭服务器，所有的会话都将关闭</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看所有的会话"><a href="#查看所有的会话" class="headerlink" title="查看所有的会话"></a>查看所有的会话</h4><p>管理会话的第一步就是要查看所有的会话，我们可以使用如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux list-session # 查看所有会话</span><br><span class="line">tmux ls # 查看所有会话，提倡使用简写形式</span><br></pre></td></tr></table></figure>
+
+<p>如果刚好处于会话中怎么办？别担心，我们可以使用对应的tmux快捷键<code>Ctrl+b</code> + <code>s</code>，此时tmux将打开一个会话列表，按上下键(⬆︎⬇︎)或者鼠标滚轮，可选中目标会话，按左右键（⬅︎➜）可收起或展开会话的窗口，选中目标会话或窗口后，按回车键即可完成切换。</p>
+<p><a href="http://louiszhai.github.io/docImages/tmux02.png" target="_blank" rel="noopener"><img src="http://louiszhai.github.io/docImages/tmux02.png" alt="查看会话"></a></p>
+<h3 id="Tmux快捷指令"><a href="#Tmux快捷指令" class="headerlink" title="Tmux快捷指令"></a>Tmux快捷指令</h3><p>关于快捷指令，首先要认识到的是：tmux的所有指令，都包含同一个前缀，默认为<code>Ctrl+b</code>，输入完前缀过后，控制台激活，命令按键才能生效。前面tmux会话相关的操作中，我们共用到了两个快捷键<code>Ctrl+b</code> + <code>d</code>、<code>Ctrl+b</code> + <code>s</code>，但这仅仅是冰山一角，欲窥tmux庞大的快捷键体系，请看下表。</p>
+<p>表一：系统指令。</p>
+<table>
+<thead>
+<tr>
+<th align="center">前缀</th>
+<th align="center">指令</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>?</code></td>
+<td align="center">显示快捷键帮助文档</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>d</code></td>
+<td align="center">断开当前会话</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>D</code></td>
+<td align="center">选择要断开的会话</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>Ctrl+z</code></td>
+<td align="center">挂起当前会话</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>r</code></td>
+<td align="center">强制重载当前会话</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>s</code></td>
+<td align="center">显示会话列表用于选择并切换</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>:</code></td>
+<td align="center">进入命令行模式，此时可直接输入<code>ls</code>等命令</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>[</code></td>
+<td align="center">进入复制模式，按<code>q</code>退出</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>]</code></td>
+<td align="center">粘贴复制模式中复制的文本</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>~</code></td>
+<td align="center">列出提示信息缓存</td>
+</tr>
+</tbody></table>
+<p>表二：窗口（window）指令。</p>
+<table>
+<thead>
+<tr>
+<th align="center">前缀</th>
+<th align="center">指令</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>c</code></td>
+<td align="center">新建窗口</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>&amp;</code></td>
+<td align="center">关闭当前窗口（关闭前需输入<code>y</code> or <code>n</code>确认）</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>0~9</code></td>
+<td align="center">切换到指定窗口</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>p</code></td>
+<td align="center">切换到上一窗口</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>n</code></td>
+<td align="center">切换到下一窗口</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>w</code></td>
+<td align="center">打开窗口列表，用于且切换窗口</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>,</code></td>
+<td align="center">重命名当前窗口</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>.</code></td>
+<td align="center">修改当前窗口编号（适用于窗口重新排序）</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>f</code></td>
+<td align="center">快速定位到窗口（输入关键字匹配窗口名称）</td>
+</tr>
+</tbody></table>
+<p>表三：面板（pane）指令。</p>
+<table>
+<thead>
+<tr>
+<th align="center">前缀</th>
+<th align="center">指令</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>&quot;</code></td>
+<td align="center">当前面板上下一分为二，下侧新建面板</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>%</code></td>
+<td align="center">当前面板左右一分为二，右侧新建面板</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>x</code></td>
+<td align="center">关闭当前面板（关闭前需输入<code>y</code> or <code>n</code>确认）</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>z</code></td>
+<td align="center">最大化当前面板，再重复一次按键后恢复正常（v1.8版本新增）</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>!</code></td>
+<td align="center">将当前面板移动到新的窗口打开（原窗口中存在两个及以上面板有效）</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>;</code></td>
+<td align="center">切换到最后一次使用的面板</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>q</code></td>
+<td align="center">显示面板编号，在编号消失前输入对应的数字可切换到相应的面板</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>{</code></td>
+<td align="center">向前置换当前面板</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>}</code></td>
+<td align="center">向后置换当前面板</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>Ctrl+o</code></td>
+<td align="center">顺时针旋转当前窗口中的所有面板</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>方向键</code></td>
+<td align="center">移动光标切换面板</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>o</code></td>
+<td align="center">选择下一面板</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>空格键</code></td>
+<td align="center">在自带的面板布局中循环切换</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>Alt+方向键</code></td>
+<td align="center">以5个单元格为单位调整当前面板边缘</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>Ctrl+方向键</code></td>
+<td align="center">以1个单元格为单位调整当前面板边缘（Mac下被系统快捷键覆盖）</td>
+</tr>
+<tr>
+<td align="center"><code>Ctrl+b</code></td>
+<td align="center"><code>t</code></td>
+<td align="center">显示时钟</td>
+</tr>
+</tbody></table>
+<p>tmux的丝滑分屏功能正是得益于以上系统、窗口、面板的快捷指令，只要你愿意，你就可以解除任意的快捷指令，然后绑上你喜欢的指令，当然这就涉及到它的可配置性了，请继续往下读。</p>
+<h3 id="灵活的配置性"><a href="#灵活的配置性" class="headerlink" title="灵活的配置性"></a>灵活的配置性</h3><p>除了快捷指令外，tmux还提供了类似vim的配置性功能。可配置性是软件的一项进阶级功能，只有具备了可配置性，软件才有了鲜活的个性，用户才能体会到操作的快感。</p>
+<h4 id="修改指令前缀"><a href="#修改指令前缀" class="headerlink" title="修改指令前缀"></a>修改指令前缀</h4><p>相信只要你用过几次tmux，就会发现<code>Ctrl+b</code>指令前缀，着实不太方便。这两个键相距太远，按键成本太高了。因此我们首先需要将它更换为距离更近的<code>Ctrl+a</code>组合键，或者不常用的 ` 键（当然其他键也是可以的）。</p>
+<p>tmux的用户级配置文件为<code>~/.tmux.conf</code>（没有的话就创建一个），修改快捷指令，只需要增加如下三行即可。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g prefix C-a #</span><br><span class="line">unbind C-b # C-b即Ctrl+b键，unbind意味着解除绑定</span><br><span class="line">bind C-a send-prefix # 绑定Ctrl+a为新的指令前缀</span><br><span class="line"></span><br><span class="line"># 从tmux v1.6版起，支持设置第二个指令前缀</span><br><span class="line">set-option -g prefix2 &#96; # 设置一个不常用的&#96;键作为指令前缀，按键更快些</span><br></pre></td></tr></table></figure>
+
+<p>修改的<code>~/.tmux.conf</code>配置文件有如下两种方式可以令其生效：</p>
+<ul>
+<li>restart tmux。</li>
+<li>在tmux窗口中，先按下<code>Ctrl+b</code>指令前缀，然后按下系统指令<code>:</code>，进入到命令模式后输入<code>source-file ~/.tmux.conf</code>，回车后生效。</li>
+</ul>
+<p>既然快捷指令如此方便，更为优雅的做法是新增一个加载配置文件的快捷指令 ，这样就可以随时随地load新的配置了，如下所示。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 绑定快捷键为r</span><br><span class="line">bind r source-file ~&#x2F;.tmux.conf \; display-message &quot;Config reloaded..&quot;</span><br></pre></td></tr></table></figure>
+
+<p>请特别注意，在已经创建的窗口中，即使加载了新的配置，旧的配置依然有效（只要你新加的功能没有覆盖旧的配置，因此如果你第一次绑定快捷指令为<code>x</code>键，然后又改为绑定<code>y</code>键，那么<code>x</code>和<code>y</code>都将有效），新建会话不受此影响，将直接采用新的配置。</p>
+<p>既然我们已经迈出配置化的第一步，那么接下来我们可以做得更多。</p>
+<h4 id="新增面板"><a href="#新增面板" class="headerlink" title="新增面板"></a>新增面板</h4><p>tmux中，使用最多的功能之一就是新增一个面板。水平方向新增面板的指令是 <code>prefix</code> + <code>&quot;</code> ，垂直方向是 <code>prefix</code> + <code>%</code>，<code>&quot;</code> 和 <code>%</code>需要两个键同时按下才能完成，加上指令前缀至少需要3~4次按键才能组成一个完整的指令，同时这个两个键也不够醒目和方便，因此我们可以绑定两个更常用的指令 <code>-</code>、<code>|</code>，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">unbind &#39;&quot;&#39;</span><br><span class="line">bind - splitw -v -c &#39;#&#123;pane_current_path&#125;&#39; # 垂直方向新增面板，默认进入当前目录</span><br><span class="line">unbind %</span><br><span class="line">bind | splitw -h -c &#39;#&#123;pane_current_path&#125;&#39; # 水平方向新增面板，默认进入当前目录</span><br></pre></td></tr></table></figure>
+
+<h4 id="开启鼠标支持"><a href="#开启鼠标支持" class="headerlink" title="开启鼠标支持"></a>开启鼠标支持</h4><p>默认情况下，tmux的多窗口之间的切换以及面板大小调整，需要输入指令才能完成，这一过程，涉及到的指令较多，而且操作麻烦，特别是面板大小调整，指令难以一步到位，这个时候开启鼠标支持就完美了。</p>
+<p>对于tmux v2.1(2015.10.28)之前的版本，需加入如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">setw -g mode-mouse on # 支持鼠标选取文本等</span><br><span class="line">setw -g mouse-resize-pane on # 支持鼠标拖动调整面板的大小(通过拖动面板间的分割线)</span><br><span class="line">setw -g mouse-select-pane on # 支持鼠标选中并切换面板</span><br><span class="line">setw -g mouse-select-window on # 支持鼠标选中并切换窗口(通过点击状态栏窗口名称)</span><br></pre></td></tr></table></figure>
+
+<p>有的地方可能会出现<code>set-window-option</code>的写法，<code>setw</code>就是它的别名。</p>
+<p>对于tmux v2.1及以上的版本，仅需加入如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set-option -g mouse on # 等同于以上4个指令的效果</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，开启鼠标支持后，iTem2默认的鼠标选中即复制功能需要同时按下 <code>Alt</code> 键，才会生效。</p>
+<h4 id="快速面板切换"><a href="#快速面板切换" class="headerlink" title="快速面板切换"></a>快速面板切换</h4><p>鼠标支持确实能带来很大的便捷性，特别是对于习惯了鼠标操作的tmux新手，但对于键盘爱好者而言，这不是什么好消息，对他们而言，双手不离键盘是基本素质。</p>
+<p>虽然指令前缀加<code>方向键</code>可以切换面板，但<code>方向键</code>太远，不够快，不够Geek。没关系，我们可以将面板切换升级为熟悉的<code>h</code>、<code>j</code>、<code>k</code>、<code>l</code>键位。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 绑定hjkl键为面板切换的上下左右键</span><br><span class="line">bind -r k select-pane -U # 绑定k为↑</span><br><span class="line">bind -r j select-pane -D # 绑定j为↓</span><br><span class="line">bind -r h select-pane -L # 绑定h为←</span><br><span class="line">bind -r l select-pane -R # 绑定l为→</span><br></pre></td></tr></table></figure>
+
+<p><code>-r</code>表示可重复按键，大概500ms之内，重复的<code>h</code>、<code>j</code>、<code>k</code>、<code>l</code>按键都将有效，完美支持了快速切换的Geek需求。</p>
+<p>除了上下左右外， 还有几个快捷指令可以设置。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bind -r e lastp # 选择最后一个面板</span><br><span class="line">bind -r ^e last # 选择最后一个窗口</span><br><span class="line"></span><br><span class="line">bind -r ^u swapp -U # 与前一个面板交换位置</span><br><span class="line">bind -r ^d swapp -D # 与后一个面板交换位置</span><br></pre></td></tr></table></figure>
+
+<h4 id="面板大小调整"><a href="#面板大小调整" class="headerlink" title="面板大小调整"></a>面板大小调整</h4><p>习惯了全键盘操作后，命令的便捷性不言而喻。既然面板切换的指令都可以升级，面板大小调整的指令自然也不能落后。如下配置就可以升级你的操作：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 绑定Ctrl+hjkl键为面板上下左右调整边缘的快捷指令</span><br><span class="line">bind -r ^k resizep -U 10 # 绑定Ctrl+k为往↑调整面板边缘10个单元格</span><br><span class="line">bind -r ^j resizep -D 10 # 绑定Ctrl+j为往↓调整面板边缘10个单元格</span><br><span class="line">bind -r ^h resizep -L 10 # 绑定Ctrl+h为往←调整面板边缘10个单元格</span><br><span class="line">bind -r ^l resizep -R 10 # 绑定Ctrl+l为往→调整面板边缘10个单元格</span><br></pre></td></tr></table></figure>
+
+<p>以上，<code>resizep</code>即<code>resize-pane</code>的别名。</p>
+<h4 id="面板最大化"><a href="#面板最大化" class="headerlink" title="面板最大化"></a>面板最大化</h4><p>当窗口中面板的数量逐渐增多时，每个面板的空间就会逐渐减少。为了保证有足够的空间显示内容，tmux从v1.8版本起，提供了面板的最大化功能，输入<code>tmux-prefix+z</code>，就可以最大化当前面板至窗口大小，只要再重复输入一次，便恢复正常。那么tmux v1.8以下的版本，怎么办呢？别急，有大神提供了如下的解决方案。</p>
+<p>首先编写一个zoom脚本，该脚本通过新建一个窗口，交换当前面板与新的窗口默认面板位置，来模拟最大的功能；通过重复一次按键，还原面板位置，并关闭新建的窗口，来模拟还原功能，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash -f</span><br><span class="line">currentwindow&#x3D;&#96;tmux list-window | tr &#39;\t&#39; &#39; &#39; | sed -n -e &#39;&#x2F;(active)&#x2F;s&#x2F;^[^:]*: *\([^ ]*\) .*&#x2F;\1&#x2F;gp&#39;&#96;;</span><br><span class="line">currentpane&#x3D;&#96;tmux list-panes | sed -n -e &#39;&#x2F;(active)&#x2F;s&#x2F;^\([^:]*\):.*&#x2F;\1&#x2F;gp&#39;&#96;;</span><br><span class="line">panecount&#x3D;&#96;tmux list-panes | wc | sed -e &#39;s&#x2F;^ *&#x2F;&#x2F;g&#39; -e &#39;s&#x2F; .*$&#x2F;&#x2F;g&#39;&#96;;</span><br><span class="line">inzoom&#x3D;&#96;echo $currentwindow | sed -n -e &#39;&#x2F;^zoom&#x2F;p&#39;&#96;;</span><br><span class="line">if [ $panecount -ne 1 ]; then</span><br><span class="line">    inzoom&#x3D;&quot;&quot;;</span><br><span class="line">fi</span><br><span class="line">if [ $inzoom ]; then</span><br><span class="line">    lastpane&#x3D;&#96;echo $currentwindow | rev | cut -f 1 -d &#39;@&#39; | rev&#96;;</span><br><span class="line">    lastwindow&#x3D;&#96;echo $currentwindow | cut -f 2- -d &#39;@&#39; | rev | cut -f 2- -d &#39;@&#39; | rev&#96;;</span><br><span class="line">    tmux select-window -t $lastwindow;</span><br><span class="line">    tmux select-pane -t $lastpane;</span><br><span class="line">    tmux swap-pane -s $currentwindow;</span><br><span class="line">    tmux kill-window -t $currentwindow;</span><br><span class="line">else</span><br><span class="line">    newwindowname&#x3D;zoom@$currentwindow@$currentpane;</span><br><span class="line">    tmux new-window -d -n $newwindowname;</span><br><span class="line">    tmux swap-pane -s $newwindowname;</span><br><span class="line">    tmux select-window -t $newwindowname;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>不妨将该脚本存放在<code>~/.tmux</code>目录中（没有则新建目录），接下来只需要绑定一个快捷指令就行，如下。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">unbind z</span><br><span class="line">bind z run &quot;. ~&#x2F;.tmux&#x2F;zoom&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="窗口变为面板"><a href="#窗口变为面板" class="headerlink" title="窗口变为面板"></a>窗口变为面板</h4><p>通过上面的zoom脚本，面板可以轻松地最大化为一个新的窗口。那么反过来，窗口是不是可以最小化为一个面板呢？</p>
+<blockquote>
+<p>试想这样一个场景：当你打开多个窗口后，然后想将其中几个窗口合并到当前窗口中，以便对比观察输出。</p>
+</blockquote>
+<p>实际上，你的要求就是将其它窗口变成面板，然后合并到当前窗口中。对于这种操作，我们可以在当前窗口，按下<code>prefix</code> + <code>:</code>，打开命令行，然后输入如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">join-pane -s window01 # 合并名称为window01的窗口的默认（第一个）面板到当前窗口中</span><br><span class="line">join-pane -s window01.1 # .1显式指定了第一个面板，.2就是第二个面板(我本地将面板编号起始值设置为1，默认是0)</span><br></pre></td></tr></table></figure>
+
+<p>每次执行<code>join-pane</code>命令都会合并一个面板，并且指定的窗口会减少一个面板，直到面板数量为0，窗口关闭。</p>
+<p>除了在当前会话中操作外，<code>join-pane</code>命令甚至可以从其它指定会话中合并面板，格式为<code>join-pane -s [session_name]:[window].[pane]</code>，如<code>join-pane -s 2:1.1</code> 即合并第二个会话的第一个窗口的第一个面板到当前窗口，当目标会话的窗口和面板数量为0时，会话便会关闭。</p>
+<p>注：上一节中的<code>swap-pane</code>命令与<code>join-pane</code>语法基本一致。</p>
+<h4 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bind m command-prompt &quot;splitw -h &#39;exec man %%&#39;&quot;   # 绑定m键为在新的panel打开man</span><br><span class="line"># 绑定P键为开启日志功能，如下，面板的输出日志将存储到桌面</span><br><span class="line">bind P pipe-pane -o &quot;cat &gt;&gt;~&#x2F;Desktop&#x2F;#W.log&quot; \; display &quot;Toggled logging to ~&#x2F;Desktop&#x2F;#W.log&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="恢复用户空间"><a href="#恢复用户空间" class="headerlink" title="恢复用户空间"></a><strong>恢复用户空间</strong></h4><p>tmux会话中，Mac的部分命令如 <code>osascript</code>、<code>open</code>、<code>pbcopy</code> 或 <code>pbpaste</code>等可能会失效（失效命令未列全）。</p>
+<p>部分bug列表如下：</p>
+<ul>
+<li><a href="https://apple.stackexchange.com/questions/174779/unable-to-run-display-notification-using-osascript-in-a-tmux-session" target="_blank" rel="noopener">applescript - Unable to run ‘display notification’ using osascript in a tmux session</a></li>
+<li><a href="https://stackoverflow.com/questions/30404944/open-command-doesnt-work-properly-inside-tmux/30412054#30412054" target="_blank" rel="noopener">osx - “open” command doesn’t work properly inside tmux</a></li>
+<li><a href="https://stackoverflow.com/questions/16618992/cant-paste-into-macvim/16661806#16661806" target="_blank" rel="noopener">clipboard - Can’t paste into MacVim</a></li>
+</ul>
+<p>对此，我们可以通过安装<code>reattach-to-user-namespace</code>包装程序来解决这个问题。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install reattach-to-user-namespace</span><br></pre></td></tr></table></figure>
+
+<p>在<code>~/.tmux.conf</code>中添加配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g default-command &quot;reattach-to-user-namespace -l $SHELL&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这样你的交互式shell最终能够重新连接到用户级的命名空间。由于连接状态能够被子进程继承，故以上配置保证了所有从 shell 启动的命令能够被正确地连接。</p>
+<p>有些时候，我们可能会在不同的操作系统中共享配置文件，如果你的tmux版本大于1.9，我们还可以使用<code>if-shell</code>来判断是否Mac系统，然后再指定<code>default-command</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if-shell &#39;test &quot;$(uname -s)&quot; &#x3D; Darwin&#39; &#39;set-option -g default-command &quot;exec reattach-to-user-namespace -l $SHELL&quot;&#39;</span><br></pre></td></tr></table></figure>
+
+<p>对于tmux v1.8及更早的版本，可以使用如下包装后的配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set-option -g default-command &#39;command -v reattach-to-user-namespace &gt;&#x2F;dev&#x2F;null &amp;&amp; exec reattach-to-user-namespace -l &quot;$SHELL&quot; || exec &quot;$SHELL&quot;&#39;</span><br></pre></td></tr></table></figure>
+
+<p>以上，<code>$SHELL</code>对应于你的默认Shell，通常是<code>/usr/bin/bash</code> 或 <code>/usr/local/bin/zsh</code>。</p>
+<h3 id="复制模式"><a href="#复制模式" class="headerlink" title="复制模式"></a>复制模式</h3><p>tmux中操作文本，自然离不开复制模式，通常使用复制模式的步骤如下：</p>
+<ol>
+<li>输入 ``+[` 进入复制模式</li>
+<li>按下 <code>空格键</code> 开始复制，移动光标选择复制区域</li>
+<li>按下 <code>回车键</code> 复制选中文本并退出复制模式</li>
+<li>按下 ``+]` 粘贴文本</li>
+</ol>
+<p>查看复制模式默认的快捷键风格：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux show-window-options -g mode-keys # mode-keys emacs</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，快捷键为<code>emacs</code>风格。</p>
+<p>为了让复制模式更加方便，我们可以将快捷键设置为熟悉的<code>vi</code>风格，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">setw -g mode-keys vi # 开启vi风格后，支持vi的C-d、C-u、hjkl等快捷键</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义复制和选择快捷键"><a href="#自定义复制和选择快捷键" class="headerlink" title="自定义复制和选择快捷键"></a><strong>自定义复制和选择快捷键</strong></h4><p>除了快捷键外，复制模式的启用、选择、复制、粘贴等按键也可以向<code>vi</code>风格靠拢。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bind Escape copy-mode # 绑定esc键为进入复制模式</span><br><span class="line">bind -t vi-copy v begin-selection # 绑定v键为开始选择文本</span><br><span class="line">bind -t vi-copy y copy-selection # 绑定y键为复制选中文本</span><br><span class="line">bind p pasteb # 绑定p键为粘贴文本（p键默认用于进入上一个窗口，不建议覆盖）</span><br></pre></td></tr></table></figure>
+
+<p>以上，绑定 <code>v</code>、<code>y</code>两键的设置只在tmux v2.4版本以下才有效，对于v2.4及以上的版本，绑定快捷键需要使用 <code>-T</code> 选项，发送指令需要使用 <code>-X</code> 选项，请参考如下设置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bind -T copy-mode-vi v send-keys -X begin-selection</span><br><span class="line">bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel</span><br></pre></td></tr></table></figure>
+
+<h4 id="Buffer缓存"><a href="#Buffer缓存" class="headerlink" title="Buffer缓存"></a><strong>Buffer缓存</strong></h4><p>tmux复制操作的内容默认会存进<code>buffer</code>里，<code>buffer</code>是一个粘贴缓存区，新的缓存总是位于栈顶，它的操作命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux list-buffers # 展示所有的 buffers</span><br><span class="line">tmux show-buffer [-b buffer-name] # 显示指定的 buffer 内容</span><br><span class="line">tmux choose-buffer # 进入 buffer 选择页面(支持jk上下移动选择，回车选中并粘贴 buffer 内容到面板上)</span><br><span class="line">tmux set-buffer # 设置buffer内容</span><br><span class="line">tmux load-buffer [-b buffer-name] file-path # 从文件中加载文本到buffer缓存</span><br><span class="line">tmux save-buffer [-a] [-b buffer-name] path # 保存tmux的buffer缓存到本地</span><br><span class="line">tmux paste-buffer # 粘贴buffer内容到会话中</span><br><span class="line">tmux delete-buffer [-b buffer-name] # 删除指定名称的buffer</span><br></pre></td></tr></table></figure>
+
+<p>以上buffer操作在不指定buffer-name时，默认处理是栈顶的buffer缓存。</p>
+<p>在tmux会话的命令行输入时，可以省略上述tmux前缀，其中list-buffers的操作如下所示：</p>
+<p><a href="http://louiszhai.github.io/docImages/tmux06.png" target="_blank" rel="noopener"><img src="http://louiszhai.github.io/docImages/tmux06.png" alt="list-buffers"></a></p>
+<p>choose-buffer的操作如下所示：</p>
+<p><a href="http://louiszhai.github.io/docImages/tmux05.png" target="_blank" rel="noopener"><img src="http://louiszhai.github.io/docImages/tmux05.png" alt="choose-buffer"></a></p>
+<p>默认情况下，buffers内容是独立于系统粘贴板的，它存在于tmux进程中，且可以在会话间共享。</p>
+<h4 id="使用系统粘贴板"><a href="#使用系统粘贴板" class="headerlink" title="使用系统粘贴板"></a><strong>使用系统粘贴板</strong></h4><p>存在于tmux进程中的buffer缓存，虽然可以在会话间共享，但不能直接与系统粘贴板共享，不免有些遗憾。幸运的是，现在我们有成熟的方案来实现这个功能。</p>
+<p><strong>在Linux上使用粘贴板</strong></p>
+<p>通常，Linux中可以使用<code>xclip</code>工具来接入系统粘贴板。</p>
+<p>首先，需要安装<code>xclip</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install xclip</span><br></pre></td></tr></table></figure>
+
+<p>然后，<code>.tmux.conf</code>的配置如下。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># buffer缓存复制到Linux系统粘贴板</span><br><span class="line">bind C-c run &quot; tmux save-buffer - | xclip -i -sel clipboard&quot;</span><br><span class="line"># Linux系统粘贴板内容复制到会话</span><br><span class="line">bind C-v run &quot; tmux set-buffer \&quot;$(xclip -o -sel clipboard)\&quot;; tmux paste-buffer&quot;</span><br></pre></td></tr></table></figure>
+
+<p>按下<code>prefix</code> + <code>Ctrl</code> + <code>c</code> 键，buffer缓存的内容将通过<code>xlip</code>程序复制到粘贴板，按下<code>prefix</code> + <code>Ctrl</code> + <code>v</code>键，tmux将通过<code>xclip</code>访问粘贴板，然后由set-buffer命令设置给buffer缓存，最后由paste-buffer粘贴到tmux会话中。</p>
+<p><strong>在Mac上使用粘贴板</strong></p>
+<p>我们都知道，Mac自带 <code>pbcopy</code> 和 <code>pbpaste</code>命令，分别用于复制和粘贴，但在tmux命令中它们却不能正常运行。这里我将详细介绍下原因：</p>
+<blockquote>
+<p>Mac的粘贴板服务是在引导命名空间注册的。命名空间存在层次之分，更高级别的命名空间拥有访问低级别命名空间（如root引导命名空间）的权限，反之却不行。流程创建的属于Mac登录会话的一部分，它会被自动包含在用户级的引导命名空间中，因此只有用户级的命名空间才能访问粘贴板服务。tmux使用守护进程(3)库函数创建其服务器进程，在Mac OS X 10.5中，苹果改变了守护进程(3)的策略，将生成的过程从最初的引导命名空间移到了根引导命名空间。而根引导命名空间访问权限较低，这意味着tmux服务器，和它的子进程，一同失去了原引导命名空间的访问权限（即无权限访问粘贴板服务）。</p>
+</blockquote>
+<p>如此，我们可以使用一个小小的包装程序来重新连接到合适的命名空间，然后执行访问用户级命名空间的粘贴板服务，这个包装程序就是<code>reattach-to-user-namespace</code>。</p>
+<p>那么，Mac下<code>.tmux.conf</code>的配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># buffer缓存复制到Mac系统粘贴板</span><br><span class="line">bind C-c run &quot;tmux save-buffer - | reattach-to-user-namespace pbcopy&quot;</span><br><span class="line"># Mac系统粘贴板内容复制到会话</span><br><span class="line">bind C-v run &quot;reattach-to-user-namespace pbpaste | tmux load-buffer - \; paste-buffer -d&quot;</span><br></pre></td></tr></table></figure>
+
+<p><code>reattach-to-user-namespace</code> 作为包装程序来访问Mac粘贴板，按下<code>prefix</code> + <code>Ctrl</code> + <code>c</code> 键，buffer缓存的内容将复制到粘贴板，按下<code>prefix</code> + <code>Ctrl</code> + <code>v</code>键，粘贴板的内容将通过 load-buffer 加载，然后由 paste-buffer 粘贴到tmux会话中。</p>
+<p>为了在复制模式中使用Mac系统的粘贴板，可做如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 绑定y键为复制选中文本到Mac系统粘贴板</span><br><span class="line">bind-key -T copy-mode-vi &#39;y&#39; send-keys -X copy-pipe-and-cancel &#39;reattach-to-user-namespace pbcopy&#39;</span><br><span class="line"># 鼠标拖动选中文本，并复制到Mac系统粘贴板</span><br><span class="line">bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel &quot;pbcopy&quot;</span><br></pre></td></tr></table></figure>
+
+<p>完成以上配置后记得重启tmux服务器。至此，复制模式中，按<code>y</code>键将保存选中的文本到Mac系统粘贴板，随后按<code>Command</code> + <code>v</code>键便可粘贴。</p>
+<h3 id="保存Tmux会话"><a href="#保存Tmux会话" class="headerlink" title="保存Tmux会话"></a>保存Tmux会话</h3><p>信息时代，数据尤为重要。tmux保护现场的能力依赖于tmux进程，如果进程退出，则意味着会话数据的丢失，因此关机重启后，tmux中的会话将被清空，这不是我们想要见到的。幸运的是，目前有这样两款插件：<code>Tmux Resurrect</code> 和 <code>Tmux Continuum</code>，可以永久保存tmux会话（它们均适用于tmux v1.9及以上版本）。</p>
+<h4 id="Tmux-Resurrect"><a href="#Tmux-Resurrect" class="headerlink" title="Tmux Resurrect"></a>Tmux Resurrect</h4><p>Tmux Resurrect无须任何配置，就能够备份tmux会话中的各种细节，包括窗口、面板的顺序、布局、工作目录，运行程序等等数据。因此它能在系统重启后完全地恢复会话。由于其幂等的恢复机制，它不会试图去恢复一个已经存在的窗口或者面板，所以，即使你不小心多恢复了几次会话，它也不会出现问题，这样主动恢复时我们就不必担心手抖多按了一次。另外，如果你是<a href="https://github.com/tmuxinator/tmuxinator" target="_blank" rel="noopener">tmuxinator</a>用户，我也建议你迁移到 tmux-resurrect插件上来，具体请参考<a href="https://github.com/tmux-plugins/tmux-resurrect/blob/master/docs/migrating_from_tmuxinator.md#migrating-from-tmuxinator" target="_blank" rel="noopener">Migrating from <code>tmuxinator</code></a>。</p>
+<p>Tmux Resurrec安装过程如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd ~&#x2F;.tmux</span><br><span class="line">mkdir plugins</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;tmux-plugins&#x2F;tmux-resurrect.git</span><br></pre></td></tr></table></figure>
+
+<p>安装后需在<code>~/.tmux.conf</code>中增加一行配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">run-shell ~&#x2F;.tmux&#x2F;plugins&#x2F;tmux-resurrect&#x2F;resurrect.tmux</span><br></pre></td></tr></table></figure>
+
+<p>至此安装成功，按下<code>prefix + r</code>重载tmux配置。</p>
+<p>Tmux Resurrec提供如下两个操作：</p>
+<ul>
+<li><strong>保存</strong>，快捷指令是<code>prefix</code> + <code>Ctrl + s</code>，tmux状态栏在保存开始，保存后分别提示”Saving…”，”Tmux environment saved !”。</li>
+<li><strong>恢复</strong>，快捷指令是<code>prefix</code> + <code>Ctrl + r</code>，tmux状态栏在恢复开始，恢复后分别提示”Restoring…”，”Tmux restore complete !”。</li>
+</ul>
+<p>保存时，tmux会话的详细信息会以文本文件的格式保存到<code>~/.tmux/resurrect</code>目录，恢复时则从此处读取，由于数据文件是明文的，因此你完全可以自由管理或者编辑这些会话状态文件（如果备份频繁，记得定期清除历史备份）。</p>
+<p><strong>可选的配置</strong></p>
+<p>Tmux Resurrec本身是免配置开箱即用的，但同时也提供了如下选项以便修改其默认设置。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g @resurrect-save &#39;S&#39; # 修改保存指令为S</span><br><span class="line">set -g @resurrect-restore &#39;R&#39; 修改恢复指令为R</span><br><span class="line"># 修改会话数据的保持路径，此处不能使用除了$HOME, $HOSTNAME, ~之外的环境变量</span><br><span class="line">set -g @resurrect-dir &#39;&#x2F;some&#x2F;path&#39;</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下只有一个保守的列表项（即<code>vi vim nvim emacs man less more tail top htop irssi mutt</code>）可以恢复，对此 <a href="https://github.com/tmux-plugins/tmux-resurrect/blob/master/docs/restoring_programs.md" target="_blank" rel="noopener">Restoring programs doc</a> 解释了怎么去恢复额外的项目。</p>
+<p><strong>进阶的备份</strong></p>
+<p>除了基础备份外，Tmux Resurrec还提供<strong>进阶的备份功能</strong>，如下所示：</p>
+<ul>
+<li>恢复vim 和 neovim 会话</li>
+<li>恢复面板内容</li>
+<li>恢复shell的历史记录（实验性功能）</li>
+</ul>
+<p>进阶的备份功能默认不开启，需要特别配置。</p>
+<p>1）恢复vim 和 neovim 会话，需要完成如下两步：</p>
+<ul>
+<li><p>通过vim的vim-obsession插件保存vim/neovim会话。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd ~&#x2F;.vim&#x2F;bundle</span><br><span class="line">git clone git:&#x2F;&#x2F;github.com&#x2F;tpope&#x2F;vim-obsession.git</span><br><span class="line">vim -u NONE -c &quot;helptags vim-obsession&#x2F;doc&quot; -c q</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>~/.tmux.conf</code>中增加两行配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g @resurrect-strategy-vim &#39;session&#39; # for vim</span><br><span class="line">set -g @resurrect-strategy-nvim &#39;session&#39; # for neovim</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>2）恢复面板内容，需在<code>~/.tmux.conf</code>中增加一行配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g @resurrect-capture-pane-contents &#39;on&#39; # 开启恢复面板内容功能</span><br></pre></td></tr></table></figure>
+
+<p>目前使用该功能时，请确保tmux的<code>default-command</code>没有包含<code>&amp;&amp;</code> 或者<code>||</code>操作符，否则将导致<a href="https://github.com/tmux-plugins/tmux-resurrect/issues/98" target="_blank" rel="noopener">bug</a>。（查看<code>default-command</code>的值，请使用命令<code>tmux show -g default-command</code>。）</p>
+<p>3）恢复shell的历史记录，需在<code>~/.tmux.conf</code>中增加一行配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g @resurrect-save-shell-history &#39;on&#39;</span><br></pre></td></tr></table></figure>
+
+<p>由于技术的限制，保存时，只有无前台任务运行的面板，它的shell历史记录才能被保存。</p>
+<h4 id="Tmux-Continuum"><a href="#Tmux-Continuum" class="headerlink" title="Tmux Continuum"></a>Tmux Continuum</h4><p>可能你嫌手动保存和恢复太过麻烦，别担心，这不是问题。Tmux Continuum 在 Tmux Resurrec的基础上更进一步，现在保存和恢复全部自动化了，如你所愿，可以无感使用tmux，不用再担心备份问题。</p>
+<p>Tmux Continuum安装过程如下所示（它依赖Tmux Resurrect，请保证已安装Tmux Resurrect插件）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd ~&#x2F;.tmux&#x2F;plugins</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;tmux-plugins&#x2F;tmux-continuum.git</span><br></pre></td></tr></table></figure>
+
+<p>安装后需在<code>~/.tmux.conf</code>中增加一行配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">run-shell ~&#x2F;.tmux&#x2F;plugins&#x2F;tmux-continuum&#x2F;continuum.tmux</span><br></pre></td></tr></table></figure>
+
+<p>Tmux Continuum默认每隔15mins备份一次，我设置的是一天一次：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g @continuum-save-interval &#39;1440&#39;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关闭自动备份</strong>，只需设置时间间隔为 <code>0</code> 即可：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g @continuum-save-interval &#39;0&#39;</span><br></pre></td></tr></table></figure>
+
+<p>想要在<strong>tmux启动时就恢复最后一次保存的会话环境</strong>，需增加如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g @continuum-restore &#39;on&#39; # 启用自动恢复</span><br></pre></td></tr></table></figure>
+
+<p>如果不想要启动时自动恢复的功能了，直接移除上面这行就行。想要绝对确定自动恢复不会发生，就在用户根目录下创建一个<code>tmux_no_auto_restore</code>空文件（创建命令：<code>touch ~/tmux_no_auto_restore</code>），该文件存在时，自动恢复将不触发。</p>
+<p>对于tmux高级用户（可能就是你）而言，同时运行多个tmux服务器也是有可能的。你可能并不希望后面启用的几个tmux服务器自动恢复或者自动保存会话。因此Tmux Continuum会优先在第一个启用的tmux服务器中生效，随后启用的tmux服务器不再享受自动恢复或自动保存会话的待遇。</p>
+<p>实际上，不管Tmux Continuum功能有没有启用，或者多久保存一次，我们都有办法从状态栏知晓。Tmux Continuum提供了一个查看运行状态的插值<code>#{continuum_status}</code>，它支持<code>status-right</code> 和 <code>status-left</code>两种状态栏设置，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g status-right &#39;Continuum status: #&#123;continuum_status&#125;&#39;</span><br></pre></td></tr></table></figure>
+
+<p>tmux运行时，<code>#{continuum_status}</code> 将显示保存的时间间隔（单位为分钟），此时状态栏会显示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Continuum status: 1440</span><br></pre></td></tr></table></figure>
+
+<p>如果其自动保存功能关闭了，那么状态栏会显示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Continuum status: off</span><br></pre></td></tr></table></figure>
+
+<p>借助Tmux Continuum插件，Mac重启时，我们甚至可以选择在<code>Terminal</code> 或者 <code>iTerm2</code> 中自动全屏启用tmux。</p>
+<p>为此，需在<code>~/.tmux.conf</code>中增加一行配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g @continuum-boot &#39;on&#39;</span><br></pre></td></tr></table></figure>
+
+<p>Mac下，自动启用tmux还支持如下选项：</p>
+<ul>
+<li><code>set -g @continuum-boot-options &#39;fullscreen&#39;</code> ，<code>Terminal</code>自动全屏，tmux命令在<code>Terminal</code>中执行。</li>
+<li><code>set -g @continuum-boot-options &#39;iterm&#39;</code> ， <code>iTerm2</code> 替换 <code>Terminal</code> 应用，tmux命令在<code>iTerm2</code>中执行。</li>
+<li><code>set -g @continuum-boot-options &#39;iterm,fullscreen&#39;</code>，<code>iTerm2</code>自动全屏，tmux命令在<code>iTerm2</code>中执行。</li>
+</ul>
+<p>Linux中则没有这些选项，它只能设置为自动启用tmux服务器。</p>
+<h4 id="Tpm"><a href="#Tpm" class="headerlink" title="Tpm"></a>Tpm</h4><p>以上，我们直接安装了tmux插件。这没有问题，可当插件越来越多时，我们就会需要统一的插件管理器。因此官方提供了tpm（支持tmux v1.9及以上版本）。</p>
+<p>tpm安装过程如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd ~&#x2F;.tmux&#x2F;plugins</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;tmux-plugins&#x2F;tpm</span><br></pre></td></tr></table></figure>
+
+<p>安装后需在<code>~/.tmux.conf</code>中增加如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 默认需要引入的插件</span><br><span class="line">set -g @plugin &#39;tmux-plugins&#x2F;tpm&#39;</span><br><span class="line">set -g @plugin &#39;tmux-plugins&#x2F;tmux-sensible&#39;</span><br><span class="line"></span><br><span class="line"># 引入其他插件的示例</span><br><span class="line"># set -g @plugin &#39;github_username&#x2F;plugin_name&#39; # 格式：github用户名&#x2F;插件名</span><br><span class="line"># set -g @plugin &#39;git@github.com&#x2F;user&#x2F;plugin&#39; # 格式：git@github插件地址</span><br><span class="line"></span><br><span class="line"># 初始化tmux插件管理器(保证这行在~&#x2F;.tmux.conf的非常靠后的位置)</span><br><span class="line">run &#39;~&#x2F;.tmux&#x2F;plugins&#x2F;tpm&#x2F;tpm&#39;</span><br></pre></td></tr></table></figure>
+
+<p>然后按下<code>prefix + r</code>重载tmux配置，使得tpm生效。</p>
+<p>基于tpm插件管理器，<strong>安装插件</strong>仅需如下两步：</p>
+<ol>
+<li>在<code>~/.tmux.conf</code>中增加新的插件，如<code>set -g @plugin &#39;...&#39;</code>。</li>
+<li>按下<code>prefix</code> + <code>I</code>键下载插件，并刷新tmux环境。</li>
+</ol>
+<p><strong>更新插件</strong>，请按下<code>prefix</code> + <code>U</code> 键，选择待更新的插件后，回车确认并更新。</p>
+<p><strong>卸载插件</strong>，需如下两步：</p>
+<ol>
+<li>在<code>~/.tmux.conf</code>中移除插件所在行。</li>
+<li>按下<code>prefix</code> + <code>alt</code> + <code>u</code> 移除插件。</li>
+</ol>
+<h3 id="会话共享"><a href="#会话共享" class="headerlink" title="会话共享"></a>会话共享</h3><h4 id="结对编程"><a href="#结对编程" class="headerlink" title="结对编程"></a>结对编程</h4><p>tmux多会话连接实时同步的功能，使得结对编程成为了可能，这也是开发者最喜欢的功能之一。现在就差一步了，就是借助tmate把tmux会话分享出去。</p>
+<p>tmate是tmux的管理工具，它可以轻松的创建tmux会话，并且自动生成ssh链接。</p>
+<p>安装tmate</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install tmate</span><br></pre></td></tr></table></figure>
+
+<p>使用tmate新建一个tmux会话</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmate</span><br></pre></td></tr></table></figure>
+
+<p>此时屏幕下方会显示ssh url，如下所示：</p>
+<p><a href="http://louiszhai.github.io/docImages/tmux07.png" target="_blank" rel="noopener"><img src="http://louiszhai.github.io/docImages/tmux07.png" alt="ssh url"></a></p>
+<p>查看tmate生成的ssh链接</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmate show-messages</span><br></pre></td></tr></table></figure>
+
+<p>生成的ssh url如下所示，其中一个为只读，另一个可编辑。</p>
+<p><a href="http://louiszhai.github.io/docImages/tmux08.png" target="_blank" rel="noopener"><img src="http://louiszhai.github.io/docImages/tmux08.png" alt="ssh url"></a></p>
+<h4 id="共享账号-amp-组会话"><a href="#共享账号-amp-组会话" class="headerlink" title="共享账号&amp;组会话"></a>共享账号&amp;组会话</h4><p>使用tmate远程共享tmux会话，受制于多方的网络质量，必然会存在些许延迟。如果共享会话的多方拥有同一个远程服务器的账号，那么我们可以使用<code>组会话</code>解决这个问题。</p>
+<p>先在远程服务器上新建一个公共会话，命名为<code>groupSession</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux new -s groupSession</span><br></pre></td></tr></table></figure>
+
+<p>其他用户不去直接连接这个会话，而是通过创建一个新的会话来加入上面的公共会话<code>groupSession</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux new -t groupSession -s otherSession</span><br></pre></td></tr></table></figure>
+
+<p>此时两个用户都可以在同一个会话里操作，就会好像第二个用户连接到了<code>groupSession</code>的会话一样。此时两个用户都可以创建新建的窗口，新窗口的内容依然会实时同步，但是其中一个用户切换到其它窗口，对另外一个用户没有任何影响，因此在这个共享的组会话中，用户各自的操作可以通过新建窗口来执行。即使第二个用户关闭<code>otherSession</code>会话，共享会话<code>groupSession</code>依然存在。</p>
+<p>组会话在共享的同时，又保留了相对的独立，非常适合结对编程场景，它是结对编程最简单的方式，如果账号不能共享，我们就要使用下面的方案了。</p>
+<h4 id="独立账号-amp-Socket共享会话"><a href="#独立账号-amp-Socket共享会话" class="headerlink" title="独立账号&amp;Socket共享会话"></a>独立账号&amp;Socket共享会话</h4><p>开始之前我们需要确保用户对远程服务器上同一个目录拥有相同的读写权限，假设这个目录为<code>/var/tmux/</code>。</p>
+<p>使用new-session（简写new）创建会话时，使用的是默认的socket位置，默认socket无法操作，所以我们需要创建一个指定socket文件的会话。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux -S &#x2F;var&#x2F;tmux&#x2F;sharefile</span><br></pre></td></tr></table></figure>
+
+<p>另一个用户进入时，需要指定socket文件加入会话。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux -S &#x2F;var&#x2F;tmux&#x2F;sharefile attach</span><br></pre></td></tr></table></figure>
+
+<p>这样，两个不同的用户就可以共享同一个会话了。</p>
+<p>通常情况下，不同的用户使用不同的配置文件来创建会话，但是，使用指定socket文件创建的tmux会话，会话加载的是第一个创建会话的用户的<code>~/.tmux.conf</code>配置文件，随后加入会话的其他用户，依然使用同一份配置文件。</p>
+<h3 id="Tmux优化"><a href="#Tmux优化" class="headerlink" title="Tmux优化"></a>Tmux优化</h3><p>要想tmux更加人性化、性能更佳，不妨参考下如下配置。</p>
+<h4 id="设置窗口面板起始序号"><a href="#设置窗口面板起始序号" class="headerlink" title="设置窗口面板起始序号"></a>设置窗口面板起始序号</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g base-index 1 # 设置窗口的起始下标为1</span><br><span class="line">set -g pane-base-index 1 # 设置面板的起始下标为1</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义状态栏"><a href="#自定义状态栏" class="headerlink" title="自定义状态栏"></a>自定义状态栏</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g status-utf8 on # 状态栏支持utf8</span><br><span class="line">set -g status-interval 1 # 状态栏刷新时间</span><br><span class="line">set -g status-justify left # 状态栏列表左对齐</span><br><span class="line">setw -g monitor-activity on # 非当前窗口有内容更新时在状态栏通知</span><br><span class="line"></span><br><span class="line">set -g status-bg black # 设置状态栏背景黑色</span><br><span class="line">set -g status-fg yellow # 设置状态栏前景黄色</span><br><span class="line">set -g status-style &quot;bg&#x3D;black, fg&#x3D;yellow&quot; # 状态栏前景背景色</span><br><span class="line"></span><br><span class="line">set -g status-left &quot;#[bg&#x3D;#FF661D] ❐ #S &quot; # 状态栏左侧内容</span><br><span class="line">set -g status-right &#39;Continuum status: #&#123;continuum_status&#125;&#39; # 状态栏右侧内容</span><br><span class="line">set -g status-left-length 300 # 状态栏左边长度300</span><br><span class="line">set -g status-right-length 500 # 状态栏左边长度500</span><br><span class="line"></span><br><span class="line">set -wg window-status-format &quot; #I #W &quot; # 状态栏窗口名称格式</span><br><span class="line">set -wg window-status-current-format &quot; #I:#W#F &quot; # 状态栏当前窗口名称格式(#I：序号，#w：窗口名称，#F：间隔符)</span><br><span class="line">set -wg window-status-separator &quot;&quot; # 状态栏窗口名称之间的间隔</span><br><span class="line">set -wg window-status-current-style &quot;bg&#x3D;red&quot; # 状态栏当前窗口名称的样式</span><br><span class="line">set -wg window-status-last-style &quot;fg&#x3D;red&quot; # 状态栏最后一个窗口名称的样式</span><br><span class="line"></span><br><span class="line">set -g message-style &quot;bg&#x3D;#202529, fg&#x3D;#91A8BA&quot; # 指定消息通知的前景、后景色</span><br></pre></td></tr></table></figure>
+
+<h4 id="开启256-colors支持"><a href="#开启256-colors支持" class="headerlink" title="开启256 colors支持"></a>开启256 colors支持</h4><p>默认情况下，tmux中使用vim编辑器，文本内容的配色和直接使用vim时有些差距，此时需要开启256 colors的支持，配置如下。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g default-terminal &quot;screen-256color&quot;</span><br></pre></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set -g default-terminal &quot;tmux-256color&quot;</span><br></pre></td></tr></table></figure>
+
+<p>或者启动tmux时增加参数<code>-2</code>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alias tmux&#x3D;&#39;tmux -2&#39; # Force tmux to assume the terminal supports 256 colours</span><br></pre></td></tr></table></figure>
+
+<h4 id="关闭默认的rename机制"><a href="#关闭默认的rename机制" class="headerlink" title="关闭默认的rename机制"></a>关闭默认的rename机制</h4><p>tmux默认会自动重命名窗口，频繁的命令行操作，将频繁触发重命名，比较浪费CPU性能，性能差的计算机上，问题可能更为明显。建议添加如下配置关闭rename机制。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">setw -g automatic-rename off</span><br><span class="line">setw -g allow-rename off</span><br></pre></td></tr></table></figure>
+
+<h4 id="去掉小圆点"><a href="#去掉小圆点" class="headerlink" title="去掉小圆点"></a>去掉小圆点</h4><p>tmux默认会同步同一个会话的操作到所有会话连接的终端窗口中，这种同步机制，限制了窗口的大小为最小的会话连接。因此当你开一个大窗口去连接会话时，实际的窗口将自动调整为最小的那个会话连接的窗口，终端剩余的空间将填充排列整齐的小圆点，如下所示。</p>
+<p><a href="http://louiszhai.github.io/docImages/tmux03.png" target="_blank" rel="noopener"><img src="http://louiszhai.github.io/docImages/tmux03.png" alt="dot"></a></p>
+<p>为了避免这种问题，我们可以在连接会话的时候，断开其他的会话连接。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux a -d</span><br></pre></td></tr></table></figure>
+
+<p>如果已经进入了tmux会话中，才发现这种问题，这个时候可以输入命令达到同样的效果。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#96;: a -d</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://louiszhai.github.io/docImages/tmux04.gif" target="_blank" rel="noopener"><img src="http://louiszhai.github.io/docImages/tmux04.gif" alt="remove dot"></a></p>
+<h3 id="脚本化的Tmux"><a href="#脚本化的Tmux" class="headerlink" title="脚本化的Tmux"></a>脚本化的Tmux</h3><p>tmux作为终端复用软件，支持纯命令行操作也是其一大亮点。你既可以启用可视化界面创建会话，也可以运行脚本生成会话，对于tmux依赖者而言，编写几个tmux脚本批量维护会话列表，快速重启、切换、甚至分享部分会话都是非常方便的。可能会有人说为什么不用Tmux Resurrect呢？是的，Tmux Resurrect很好，一键恢复也很诱人，但是对于一个维护大量tmux会话的用户而言，一键恢复可能不见得好，分批次恢复可能是他（她）更想要的，脚本化的tmux就很好地满足了这点。</p>
+<p>脚本中创建tmux会话时，由于不需要开启可视化界面，需要输入<code>-d</code>参数指定会话后台运行，如下。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux new -s init -d # 后台创建一个名称为init的会话</span><br></pre></td></tr></table></figure>
+
+<p>新建的会话，建议<strong>重命令会话的窗口名称</strong>，以便后续维护。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 重命名init会话的第一个窗口名称为service</span><br><span class="line">tmux rename-window -t &quot;init:1&quot; service</span><br></pre></td></tr></table></figure>
+
+<p>现在，可以在刚才的窗口中<strong>输入指令</strong>了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 切换到指定目录并运行python服务</span><br><span class="line">tmux send -t &quot;init:service&quot; &quot;cd ~&#x2F;workspace&#x2F;language&#x2F;python&#x2F;;python2.7 server.py&quot; Enter</span><br></pre></td></tr></table></figure>
+
+<p>一个面板占用一个窗口可能太浪费了，我们来<strong>分个屏</strong>吧。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 默认上下分屏</span><br><span class="line">tmux split-window -t &quot;init:service&quot;</span><br><span class="line"># 切换到指定目录并运行node服务</span><br><span class="line">tmux send -t &quot;init:service&quot; &#39;cd ~&#x2F;data&#x2F;louiszhai&#x2F;node-webserver&#x2F;;npm start&#39; Enter</span><br></pre></td></tr></table></figure>
+
+<p>现在一个窗口拥有上下两个面板，是时候<strong>创建一个新的窗口</strong>来运行更多的程序了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 新建一个名称为tool的窗口</span><br><span class="line">tmux neww -a -n tool -t init # neww等同于new window</span><br><span class="line"># 运行weinre调试工具</span><br><span class="line">tmux send -t &quot;init:tool&quot; &quot;weinre --httpPort 8881 --boundHost -all-&quot; Enter</span><br></pre></td></tr></table></figure>
+
+<p>另外新建窗口运行程序，有更方便的方式，比如使用 <code>processes</code> 选项。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tmux neww-n processes ls # 新建窗口并执行命令，命令执行结束后窗口将关闭</span><br><span class="line">tmux neww-n processes top # 由于top命令持续在前台运行，因此窗口将保留，直到top命令退出</span><br></pre></td></tr></table></figure>
+
+<p>新的窗口，我们尝试下水平分屏。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 水平分屏</span><br><span class="line">tmux split-window -h -t &quot;init:tool&quot;</span><br><span class="line"># 切换到指定目录并启用aria2 web管理后台</span><br><span class="line">tmux send -t &quot;init:tool&quot; &quot;cd ~&#x2F;data&#x2F;tools&#x2F;AriaNg&#x2F;dist&#x2F;;python -m SimpleHTTPServer 10108&quot; Enter</span><br></pre></td></tr></table></figure>
+
+<p>类似的脚本，我们可以编写一打，这样快速重启、切换、甚至分享会话都将更加便捷。</p>
+<h3 id="开机自动启用Web服务器"><a href="#开机自动启用Web服务器" class="headerlink" title="开机自动启用Web服务器"></a>开机自动启用Web服务器</h3><p>开机自动准备工作环境是一个很好的idea，但却不好实现。对于程序员而言，一个开机即用的计算机会节省大量的初始化操作，特别是前端工程师，本地常常会启用多个服务器，每次开机挨个启动将耗时耗力。为此，在遇到tmux之前，我常常拖延重启计算机的时机，一度连续运行Mac一月之久，直到它不堪重负。</p>
+<p>有了tmux脚本化的基础，开机自动启用web服务器就不在话下了，接杯水的时间，计算机就重启恢复了满血。如下是操作步骤：</p>
+<p>首先，上面的tmux脚本，可以合并到同一个文件中，指定文件权限为可执行，并命名为<code>init.sh</code>（名称可自取）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod u+x .&#x2F;init.sh</span><br></pre></td></tr></table></figure>
+
+<p>然后，打开 <code>系统偏好设置</code> - <code>用户与群组</code> - <code>登录项</code>，点击添加按钮<code>+</code>，选择刚刚保存的<code>init.sh</code>脚本，最终效果如下：</p>
+<p><a href="http://louiszhai.github.io/docImages/tmux09.png" target="_blank" rel="noopener"><img src="http://louiszhai.github.io/docImages/tmux09.png" alt="init.sh"></a></p>
+<p>至此，Mac开机将自动运行 <code>init.sh</code> 脚本，自动启用web服务器。</p>
+<p>完成了上面这些配置，就真正实现了一键开机。</p>
+<p>最后，附上我本地的配置文件 <a href="https://github.com/Louiszhai/tmux/blob/master/.tmux.conf" target="_blank" rel="noopener">.tmux.conf</a>，以及启动脚本 <a href="https://github.com/Louiszhai/tmux/blob/master/init.sh" target="_blank" rel="noopener">init.sh</a>。</p>
+]]></content>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NumPy 常用内容</title>
+    <url>/2020/03/22/NumPy-%E5%B8%B8%E7%94%A8%E5%86%85%E5%AE%B9/</url>
+    <content><![CDATA[<p><del>又开新坑啦，后续补</del></p>
+]]></content>
+      <tags>
+        <tag>Python</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Matplotlib 模块常用内容</title>
+    <url>/2020/03/21/Matplotlib-%E6%A8%A1%E5%9D%97%E5%B8%B8%E7%94%A8%E5%86%85%E5%AE%B9/</url>
+    <content><![CDATA[<p>Matplotlib 是一个Python 2D绘图库，Python 中经常用它来实现数据可视化，在此整理常用内容。</p>
+<a id="more"></a>
+
+<p><strong><em>内容摘自<a href="https://www.matplotlib.org.cn/tutorials/introductory/pyplot.html#intro-to-pyplot" target="_blank" rel="noopener">官方文档</a>、<a href="https://www.runoob.com/numpy/numpy-matplotlib.html" target="_blank" rel="noopener">菜鸟驿站</a>和<a href="https://morvanzhou.github.io/tutorials/data-manipulation/plt/" target="_blank" rel="noopener">莫烦Python</a></em></strong></p>
+<p><code>matplotlib.pyplot</code> 是使 Matplotlib 像 MATLAB 一样工作的命令样式函数的集合，最为常用，一般用如下形式导入：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>pyplot API通常不如面向对象的API灵活。您在此处看到的大多数函数调用也可以被称为<code>Axes</code>对象的方法。我们建议浏览教程和示例以了解其工作原理。</p>
+</blockquote>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">plt.ylabel(<span class="string">'some numbers'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<img src="https://matplotlib.org/_images/sphx_glr_pyplot_001.png" alt="sphx_glr_pyplot_001" style="zoom:80%;" />
+
+<p>可以看到，当向 <code>plot()</code> 传入一个向量时，默认这个向量中是 y 的值，而由于 Python 中下标从 0 开始，故 y 轴是从 0 开始的。</p>
+<p><code>plot()</code>是一个通用命令，它将接受任意数量的参数。例如，要绘制x与y的关系，可以发出以下命令：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>])</span><br></pre></td></tr></table></figure>
+
+<img src="https://matplotlib.org/_images/sphx_glr_pyplot_002.png" alt="sphx_glr_pyplot_002" style="zoom:80%;" />
+
+<h3 id="格式化绘图样式"><a href="#格式化绘图样式" class="headerlink" title="格式化绘图样式"></a>格式化绘图样式</h3><p>对于每对x，y参数，都有一个可选的第三个参数，它是表示图的颜色和线条类型的格式字符串。默认格式字符串是“ b-”，这是一条蓝色实线。例如，要用红色圆圈绘制以上内容，您将发出</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>], <span class="string">'ro'</span>)</span><br><span class="line">plt.axis([<span class="number">0</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">20</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<img src="https://matplotlib.org/_images/sphx_glr_pyplot_003.png" alt="sphx_glr_pyplot_003" style="zoom:80%;" />
+
+<p>通常，您将使用 numpy 数组。下面的示例说明了在一个命令中使用数组绘制多行具有不同格式样式的线条的情况。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># evenly sampled time at 200ms intervals</span></span><br><span class="line">t = np.arange(<span class="number">0.</span>, <span class="number">5.</span>, <span class="number">0.2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># red dashes, blue squares and green triangles</span></span><br><span class="line">plt.plot(t, t, <span class="string">'r--'</span>, t, t**<span class="number">2</span>, <span class="string">'bs'</span>, t, t**<span class="number">3</span>, <span class="string">'g^'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<img src="https://matplotlib.org/_images/sphx_glr_pyplot_004.png" alt="sphx_glr_pyplot_004" style="zoom:80%;" />
+
+<p>可以使用的格式化字符有：</p>
+<table>
+<thead>
+<tr>
+<th align="left">字符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&#39;-&#39;</code></td>
+<td align="left">实线样式</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;--&#39;</code></td>
+<td align="left">短横线样式</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;-.&#39;</code></td>
+<td align="left">点划线样式</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;:&#39;</code></td>
+<td align="left">虚线样式</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;.&#39;</code></td>
+<td align="left">点标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;,&#39;</code></td>
+<td align="left">像素标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;o&#39;</code></td>
+<td align="left">圆标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;v&#39;</code></td>
+<td align="left">倒三角标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;^&#39;</code></td>
+<td align="left">正三角标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;&lt;&#39;</code></td>
+<td align="left">左三角标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;&gt;&#39;</code></td>
+<td align="left">右三角标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;1&#39;</code></td>
+<td align="left">下箭头标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;2&#39;</code></td>
+<td align="left">上箭头标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;3&#39;</code></td>
+<td align="left">左箭头标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;4&#39;</code></td>
+<td align="left">右箭头标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;s&#39;</code></td>
+<td align="left">正方形标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;p&#39;</code></td>
+<td align="left">五边形标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;*&#39;</code></td>
+<td align="left">星形标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;h&#39;</code></td>
+<td align="left">六边形标记 1</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;H&#39;</code></td>
+<td align="left">六边形标记 2</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;+&#39;</code></td>
+<td align="left">加号标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;x&#39;</code></td>
+<td align="left">X 标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;D&#39;</code></td>
+<td align="left">菱形标记</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;d&#39;</code></td>
+<td align="left">窄菱形标记</td>
+</tr>
+<tr>
+<td align="left">`’</td>
+<td align="left">‘`</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;_&#39;</code></td>
+<td align="left">水平线标记</td>
+</tr>
+</tbody></table>
+<p>以下是颜色的缩写：</p>
+<table>
+<thead>
+<tr>
+<th align="left">字符</th>
+<th align="left">颜色</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&#39;b&#39;</code></td>
+<td align="left">蓝色</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;g&#39;</code></td>
+<td align="left">绿色</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;r&#39;</code></td>
+<td align="left">红色</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;c&#39;</code></td>
+<td align="left">青色</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;m&#39;</code></td>
+<td align="left">品红色</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;y&#39;</code></td>
+<td align="left">黄色</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;k&#39;</code></td>
+<td align="left">黑色</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;w&#39;</code></td>
+<td align="left">白色</td>
+</tr>
+</tbody></table>
+<p>plt.imshow</p>
+]]></content>
+      <tags>
+        <tag>Python</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>macOS 上遇到 OMP: Error #15: Initializing libiomp5.dylib, but found libiomp5.dylib already initialized.</title>
+    <url>/2020/03/21/macOS-%E4%B8%8A%E9%81%87%E5%88%B0-OMP-Error-15-Initializing-libiomp5-dylib-but-found-libiomp5-dylib-already-initialized/</url>
+    <content><![CDATA[<p><del>我又开始倒腾深度学习了。</del></p>
+<a id="more"></a>
+
+<p>最近在学习 Keras ，结果运行时候碰到了这样的错误：</p>
+<blockquote>
+<p>OMP: Error #15: Initializing libiomp5.dylib, but found libiomp5.dylib already initialized.</p>
+</blockquote>
+<p>大概意思就是初始化libiomp5.dylib时发现已经初始化过了，经过Google发现这似乎是一个 macOS 存在的特殊问题。</p>
+<p>解决方法 （允许副本存在）：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ['KMP_DUPLICATE_LIB_OK']='True'</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决 CS:GO 国服闪退问题</title>
+    <url>/2020/03/09/%E8%A7%A3%E5%86%B3-CS-GO-%E5%9B%BD%E6%9C%8D%E9%97%AA%E9%80%80%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p><del>没错我又来水文章了</del></p>
+<a id="more"></a>
+
+<p>在 macOS 和 Linux 上玩国服 CS:GO 经常会闪退，可能是因为完美的和谐文件出了问题，只要删除和谐文件就解决了，亲测有效。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rm -rf ~&#x2F;.steam&#x2F;steam&#x2F;steamapps&#x2F;common&#x2F;Counter-Strike\ Global\ Offensive&#x2F;csgo&#x2F;pakxv_perfectworld*.vpk</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>杂记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OneDrive 加速</title>
+    <url>/2020/03/06/OneDrive-%E5%8A%A0%E9%80%9F/</url>
+    <content><![CDATA[<p><del>好久没写了，来水一篇</del></p>
+<a id="more"></a>
+
+<p>因为要在各种设备上使用 Microsoft Office ，所以很早前就订阅了 Office 365 ，但由于 OneDrive 速度实在迷，就一直没用。考虑到 iCloud Drive 的50G实在不大够用，就用重新把 OneDrive 下回来了，加速了以后文件也都基本能秒开。</p>
+<p>找到了<a href="https://www.zhangxuhu.com/archives/158.html" target="_blank" rel="noopener">这篇文章</a>，提供了多种方法加速，同时也滋瓷一下这个 <a href="https://github.com/Marukon/Microsoft-Hosts" target="_blank" rel="noopener">repo</a> 。由于 host 会经常更新，我只把下面这一串（<a href="https://raw.githubusercontent.com/Marukon/Microsoft-Hosts/master/Onedrive%20PAC" target="_blank" rel="noopener">链接</a>）扔进了飞机的 PAC 。当然，这么一改得注意一下飞机的流量够不够用。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">13.107.42.12,</span><br><span class="line">13.107.136.9,</span><br><span class="line">52.114.158.92,</span><br><span class="line">*live.com*,</span><br><span class="line">*live.net*,</span><br><span class="line">*microsoft.com*,</span><br><span class="line">*office.com*,</span><br><span class="line">*office.net*,</span><br><span class="line">*windows.com*,</span><br><span class="line">*windows.net*,</span><br><span class="line">*sharepoint.com*,</span><br><span class="line">*office365.com*,</span><br><span class="line">*officeppe.net*,</span><br><span class="line">*skype.com*,</span><br><span class="line">*onedrive.com*,</span><br><span class="line">*msocsp.com*,</span><br><span class="line">*msauthimages.net*,</span><br><span class="line">*msauth.net*,</span><br><span class="line">*microsoftonline.com*,</span><br><span class="line">*msn.com*,</span><br><span class="line">*onenote.com*,</span><br><span class="line">*onenote.net*,</span><br><span class="line">*1drv.com*</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>技巧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>蓝桥杯PREV09-大臣的旅费</title>
+    <url>/2020/02/27/%E8%93%9D%E6%A1%A5%E6%9D%AFPREV09-%E5%A4%A7%E8%87%A3%E7%9A%84%E6%97%85%E8%B4%B9/</url>
+    <content><![CDATA[<p><a href="http://lx.lanqiao.cn/problem.page?gpid=T32" target="_blank" rel="noopener">题目链接</a></p>
+<h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>求树的直径。</p>
+<a id="more"></a>
+
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>对于<strong>树的直径</strong>，《算法导论》上有这么一句：</p>
+<blockquote>
+<p>树中所有最短路径的最大值即为树的直径。</p>
+</blockquote>
+<p>换句话说，不重复路径的最大值即为树的直径。有以下算法可快速求出树的直径：</p>
+<blockquote>
+<p>先对任意一个结点做 BFS / DFS 求出最远的结点，然后以这个结点为起始结点再做 BFS / DFS 到达另一个最远结点。第一次到达的结点是这个图的直径的一端，第二次到达的则为另一端。</p>
+</blockquote>
+<p>详细证明可<a href="[https://ikely.me/2014/09/21/%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84/](https://ikely.me/2014/09/21/树的直径/)">见此</a>。</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN=<span class="number">10005</span>;</span><br><span class="line"><span class="keyword">int</span> maps[MAXN][MAXN];</span><br><span class="line"><span class="keyword">bool</span> vst[MAXN][MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dis[MAXN];</span><br><span class="line"><span class="keyword">int</span> maxlen,n,maxi;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(maxlen&lt;len)&#123;</span><br><span class="line">        maxlen=len;</span><br><span class="line">        maxi=x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;dis[x].size(); i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(vst[x][dis[x][i]]||maps[x][dis[x][i]]==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        vst[x][dis[x][i]]=vst[dis[x][i]][x]=<span class="number">1</span>;</span><br><span class="line">        dfs(dis[x][i], len+maps[x][dis[x][i]]);</span><br><span class="line">        vst[x][dis[x][i]]=vst[dis[x][i]][x]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">int</span> p,q,d;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n<span class="number">-1</span>; i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;p, &amp;q, &amp;d);</span><br><span class="line">        maps[p][q]=maps[q][p]=d;</span><br><span class="line">        dis[p].push_back(q);</span><br><span class="line">        dis[q].push_back(p);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    dfs(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">    dfs(maxi,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=maxlen; i++)</span><br><span class="line">        ans+=i+<span class="number">10</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>原本是以每一个结点为起点，做 DFS ，然后挑出最长路径，果断超时。然后看到有关于“树的直径”以及其快速求解的算法，才得以解决，说明还是有很多没接触过的基础性知识。以及 DFS 写起来真方便（。</p>
+]]></content>
+      <tags>
+        <tag>竞赛</tag>
+        <tag>算法&amp;数据结构</tag>
+        <tag>树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>蓝桥杯PREV08-买不到的数目</title>
+    <url>/2020/02/27/%E8%93%9D%E6%A1%A5%E6%9D%AFPREV08-%E4%B9%B0%E4%B8%8D%E5%88%B0%E7%9A%84%E6%95%B0%E7%9B%AE/</url>
+    <content><![CDATA[<p><a href="http://lx.lanqiao.cn/problem.page?gpid=T31" target="_blank" rel="noopener">题目链接</a></p>
+<h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>输入两个数 a、b，对于任意自然数 x、y，ax+by 所表示不出的最大整数是多少。</p>
+<a id="more"></a>
+
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>看到<a href="https://blog.csdn.net/qq_45228537/article/details/104329291" target="_blank" rel="noopener">大佬的文章</a>，有如下结论：</p>
+<blockquote>
+<p>a,b为质数，x,y为非负整数，则ax+by最大不能表示的数为ab-a-b。</p>
+</blockquote>
+<p>但题目中似乎没说 a、b为质数，那就用动归吧。</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN=<span class="number">1e7</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">bool</span> dp[MAXN]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> a,b,ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    dp[<span class="number">0</span>]=dp[a]=dp[b]=<span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; maxn - a - b; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span>(dp[i]) </span><br><span class="line">            dp[i + a] = dp[i + b] = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">else</span> </span><br><span class="line">            ans = i;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>一开始我是用这样的迭代来动归的：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=max(a,b); i&lt;MAXN-a-b; i++)&#123;</span><br><span class="line">  <span class="keyword">if</span>(!dp[i])</span><br><span class="line">    dp[i]=(dp[i-a]||dp[i-b]);</span><br><span class="line">  <span class="keyword">if</span>(!dp[i])</span><br><span class="line">    m=i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这么写虽然能过，但是有问题的，如果 2a &lt; b，那么会漏掉 [a, b] 之间能表示的数，所以还是应该像完整代码中那样顺推。</p>
+]]></content>
+      <tags>
+        <tag>竞赛</tag>
+        <tag>算法&amp;数据结构</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>蓝桥杯PREV07-连号区间数</title>
+    <url>/2020/02/26/%E8%93%9D%E6%A1%A5%E6%9D%AFPREV07-%E8%BF%9E%E5%8F%B7%E5%8C%BA%E9%97%B4%E6%95%B0/</url>
+    <content><![CDATA[<p><a href="http://lx.lanqiao.cn/problem.page?gpid=T30" target="_blank" rel="noopener">题目链接</a></p>
+<h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>定义连号区间为：某个区间按序排列后，其元素为“连续”的。求一个全排列中连号区间的数目。</p>
+<a id="more"></a>
+
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>迭代 l 和 r ，找出区间 [l, r] 的最大值和最小值，判断区间和与“从最小值到最大值的连续数之和”是否相当。</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> nums[<span class="number">50005</span>];</span><br><span class="line"><span class="keyword">int</span> n, ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;nums[i]);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;=n; j++)&#123;</span><br><span class="line">        <span class="keyword">int</span> M=INT_MIN, m=INT_MAX;</span><br><span class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=j; i&lt;=n; i++)&#123;</span><br><span class="line">            sum+=nums[i];</span><br><span class="line">            M=max(M, nums[i]);</span><br><span class="line">            m=min(m, nums[i]);</span><br><span class="line">            <span class="keyword">if</span>(sum==(m+M)*(M-m+<span class="number">1</span>)/<span class="number">2.0</span>)&#123;</span><br><span class="line">                ans++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>比较简单，要注意 <code>sum==(m+M)*(M-m+1)/2.0</code> 是2.0。</p>
+]]></content>
+      <tags>
+        <tag>竞赛</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>蓝桥杯PREV06-翻硬币</title>
+    <url>/2020/02/25/%E8%93%9D%E6%A1%A5%E6%9D%AFPREV06-%E7%BF%BB%E7%A1%AC%E5%B8%81/</url>
+    <content><![CDATA[<p><a href="http://lx.lanqiao.cn/problem.page?gpid=T29" target="_blank" rel="noopener">题目链接</a></p>
+<h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>就不概述了，比较简单。</p>
+<a id="more"></a>
+
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>其实就是找出两个字符串不同字符的下标，两两相减后求和。</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> s1,s2;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;s1&gt;&gt;s2;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;s1.size(); i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(s1[i]!=s2[i])</span><br><span class="line">            v.push_back(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;v.size(); i+=<span class="number">2</span>)&#123;</span><br><span class="line">        ans+=v[i]-v[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>有时候不要想太多，别被题目吓到了。</p>
+]]></content>
+      <tags>
+        <tag>竞赛</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>蓝桥杯PREV04-剪格子</title>
+    <url>/2020/02/25/%E8%93%9D%E6%A1%A5%E6%9D%AFPREV04-%E5%89%AA%E6%A0%BC%E5%AD%90/</url>
+    <content><![CDATA[<p><a href="http://lx.lanqiao.cn/problem.page?gpid=T27" target="_blank" rel="noopener">题目链接</a></p>
+<h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>选出格子中的一个连续区域，使该区域数字之和为所有数之和的一半，并且要求该连续区域中元素数量最少。</p>
+<a id="more"></a>
+
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>dfs，搜索过程中记录目前搜索过的格子数量以及和。</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[<span class="number">15</span>][<span class="number">15</span>], vst[<span class="number">15</span>][<span class="number">15</span>], _sum, _ans=<span class="number">1002</span>, n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x&lt;<span class="number">0</span>||x&gt;=m||y&lt;<span class="number">0</span>||y&gt;=n)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> !vst[y][x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> sum, <span class="keyword">int</span> step)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!check(x, y))</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    step++;</span><br><span class="line">    sum+=<span class="built_in">map</span>[y][x];</span><br><span class="line">    <span class="keyword">if</span>(sum==_sum/<span class="number">2</span>)&#123;</span><br><span class="line">        _ans=min(_ans, step);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(sum&gt;_sum/<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    vst[y][x]=<span class="number">1</span>;</span><br><span class="line">    dfs(x+<span class="number">1</span>, y, sum, step);dfs(x, y+<span class="number">1</span>, sum, step);</span><br><span class="line">    dfs(x<span class="number">-1</span>, y, sum, step);dfs(x, y<span class="number">-1</span>, sum, step);</span><br><span class="line">    vst[y][x]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;m&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;n; j++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;<span class="built_in">map</span>[j][i];</span><br><span class="line">            _sum+=<span class="built_in">map</span>[j][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span>(_ans&gt;m*n)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="number">0</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;_ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>本来想用bfs的，但似乎写起来比dfs麻烦，看来还是应该优先考虑dfs。</p>
+]]></content>
+      <tags>
+        <tag>竞赛</tag>
+        <tag>算法&amp;数据结构</tag>
+        <tag>搜索</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>蓝桥杯PREV02-打印十字图</title>
+    <url>/2020/02/24/%E8%93%9D%E6%A1%A5%E6%9D%AFPREV02-%E6%89%93%E5%8D%B0%E5%8D%81%E5%AD%97%E5%9B%BE/</url>
+    <content><![CDATA[<p><a href="http://lx.lanqiao.cn/problem.page?gpid=T25" target="_blank" rel="noopener">题目链接</a></p>
+<h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>根据输入层数 n 和输出图案找规律。</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">n&#x3D;1:</span><br><span class="line">. . $ $ $ $ $ . . </span><br><span class="line">. . $ . . . $ . . </span><br><span class="line">$ $ $ . $ . $ $ $ </span><br><span class="line">$ . . . $ . . . $ </span><br><span class="line">$ . $ $ $ $ $ . $ </span><br><span class="line">$ . . . $ . . . $ </span><br><span class="line">$ $ $ . $ . $ $ $ </span><br><span class="line">. . $ . . . $ . . </span><br><span class="line">. . $ $ $ $ $ . . </span><br><span class="line"></span><br><span class="line">n&#x3D;3:</span><br><span class="line">. . $ $ $ $ $ $ $ $ $ $ $ $ $ . . </span><br><span class="line">. . $ . . . . . . . . . . . $ . . </span><br><span class="line">$ $ $ . $ $ $ $ $ $ $ $ $ . $ $ $ </span><br><span class="line">$ . . . $ . . . . . . . $ . . . $ </span><br><span class="line">$ . $ $ $ . $ $ $ $ $ . $ $ $ . $ </span><br><span class="line">$ . $ . . . $ . . . $ . . . $ . $ </span><br><span class="line">$ . $ . $ $ $ . $ . $ $ $ . $ . $ </span><br><span class="line">$ . $ . $ . . . $ . . . $ . $ . $ </span><br><span class="line">$ . $ . $ . $ $ $ $ $ . $ . $ . $ </span><br><span class="line">$ . $ . $ . . . $ . . . $ . $ . $ </span><br><span class="line">$ . $ . $ $ $ . $ . $ $ $ . $ . $ </span><br><span class="line">$ . $ . . . $ . . . $ . . . $ . $ </span><br><span class="line">$ . $ $ $ . $ $ $ $ $ . $ $ $ . $ </span><br><span class="line">$ . . . $ . . . . . . . $ . . . $ </span><br><span class="line">$ $ $ . $ $ $ $ $ $ $ $ $ . $ $ $ </span><br><span class="line">. . $ . . . . . . . . . . . $ . . </span><br><span class="line">. . $ $ $ $ $ $ $ $ $ $ $ $ $ . .</span><br></pre></td></tr></table></figure>
+
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>找规律题，由于图像具有对称性，只需要求出左上角1/4部分，就能得到整个图案。</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IOS ios::sync_with_stdio(false);cin.tie(0)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">char</span> <span class="built_in">map</span>[<span class="number">135</span>][<span class="number">135</span>]; <span class="comment">// 1/4的画</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> draw(x, y) map[y][x]=<span class="meta-string">'$'</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> out(x, y) cout&lt;&lt;map[y][x]</span></span><br><span class="line"><span class="keyword">int</span> n, len;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    IOS;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    len=(<span class="number">4</span>*n+<span class="number">5</span>+<span class="number">1</span>)/<span class="number">2</span>; <span class="comment">// half length</span></span><br><span class="line">    <span class="keyword">int</span> c=len<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;len; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;len; j++)</span><br><span class="line">            <span class="built_in">map</span>[i][j]=<span class="string">'.'</span>;</span><br><span class="line">    <span class="keyword">while</span>(c&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        draw(c,c);</span><br><span class="line">        draw(c<span class="number">-1</span>, c); draw(c, c<span class="number">-1</span>);</span><br><span class="line">        draw(c<span class="number">-2</span>, c); draw(c, c<span class="number">-2</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i+c&lt;len; i++)&#123;</span><br><span class="line">            draw(c<span class="number">-2</span>, c+i);</span><br><span class="line">            draw(c+i, c<span class="number">-2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        c-=<span class="number">2</span>;        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;len; i++)&#123; <span class="comment">//y</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;len; j++) <span class="comment">//x</span></span><br><span class="line">            out(j, i);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=len<span class="number">-2</span>; j&gt;=<span class="number">0</span>; j--)</span><br><span class="line">            out(j, i);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=len<span class="number">-2</span>; i&gt;=<span class="number">0</span>; i--)&#123; <span class="comment">//y</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;len; j++) <span class="comment">//x</span></span><br><span class="line">            out(j, i);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=len<span class="number">-2</span>; j&gt;=<span class="number">0</span>; j--)</span><br><span class="line">            out(j, i);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>比较无脑，但是不能眼花、浮躁。</p>
+]]></content>
+      <tags>
+        <tag>竞赛</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>蓝桥杯PREV03-带分数</title>
+    <url>/2020/02/24/%E8%93%9D%E6%A1%A5%E6%9D%AFPREV03-%E5%B8%A6%E5%88%86%E6%95%B0/</url>
+    <content><![CDATA[<p><a href="http://lx.lanqiao.cn/problem.page?gpid=T26" target="_blank" rel="noopener">题目链接</a></p>
+<h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>一个数 n 可表示为 n = a + c / b ，其中a、b、c中数字1-9分别出现且只出现一次，统计输入值 n 的全部表示方式的数量。</p>
+<a id="more"></a>
+
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>由于要求1-9每个数字都要出现一次，那很容易想到采用<strong>全排列</strong>。关键在于，对于每一种排列，该如何从中选取 a、b、c 三个数。</p>
+<p>首先可以确定的是 a&lt;n ，那 a&gt;=n的情况可以一并排除，其次由于 a、b、c、n都是整数，那么 c/a 也要是整数，及 c%b=0 （在这一条件中，已经隐含了 c&gt;=b），这样一来结合剪枝，就能很容易得到答案。</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> nums[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;<span class="number">10</span>; i++)</span><br><span class="line">        nums[i]=i;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;<span class="number">8</span>; i++)&#123; <span class="comment">// a</span></span><br><span class="line">            a=a*<span class="number">10</span>+nums[i];</span><br><span class="line">            <span class="keyword">if</span>(a&gt;=n)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">int</span> c=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;<span class="number">9</span>; j++)&#123; <span class="comment">// c</span></span><br><span class="line">                c=c*<span class="number">10</span>+nums[j];</span><br><span class="line">                <span class="keyword">int</span> b=<span class="number">0</span>; <span class="comment">// b</span></span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=j+<span class="number">1</span>; k&lt;<span class="number">10</span>; k++)</span><br><span class="line">                    b=b*<span class="number">10</span>+nums[k];</span><br><span class="line">                <span class="keyword">if</span>(c%b!=<span class="number">0</span>)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>(a+c/b==n)</span><br><span class="line">                    ans++;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">while</span>(next_permutation(nums+<span class="number">1</span>, nums+<span class="number">10</span>));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>碰到好几个坑，能反应出不少知识体系和做题思路的问题：</p>
+<ul>
+<li>原本把 <code>a=a*10+nums[i]</code> 写成了 <code>a*=10+nums[i]</code> ，以为这两者没有区别，但实际上后者等同于 <code>a=a*(10+nums[i])</code> ， <code>*=</code> 的优先级比较低。</li>
+<li>由于 c&gt;b 的一个充分条件是 c 的长度大于 b ，所以一开始直接在迭代 c 的代码中直接让 c 的长度大于 b ，及写成了 <code>for(int j=i+ceil((9+i)/2.0); j&lt;9; j++)</code> ，但过多的条件使得结果出现了错误。在能选择简单明了的情况下应当避免选择复杂。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>竞赛</tag>
+        <tag>算法&amp;数据结构</tag>
+        <tag>搜索</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>POJ2352-Stars</title>
+    <url>/2020/02/22/POJ2352-Stars/</url>
+    <content><![CDATA[<p><a href="http://poj.org/problem?id=2352" target="_blank" rel="noopener">题目链接</a></p>
+<h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>给输入星星的坐标（y递增，若y相等，x递增），每个星星都有一个等级，规定它的等级就是在它左下方的星星的个数。输入所有星星后，依次输出等级为0到n-1的星星的个数。</p>
+<a id="more"></a>
+
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>乍一看很茫然，仔细观察输入规律就能发现，是在x的维度上求逆元数。</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN=<span class="number">32005</span>;</span><br><span class="line"><span class="keyword">int</span> tree[MAXN];</span><br><span class="line"><span class="keyword">int</span> level[MAXN],n;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) x&amp;-(x)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(x&lt;=MAXN)&#123;     <span class="comment">//⚠️注意，由于没有离散化，x要小于等于MAXN而非n</span></span><br><span class="line">        tree[x]+=d;</span><br><span class="line">        x+=lowbit(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getsum</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(x&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        sum+=tree[x];</span><br><span class="line">        x-=lowbit(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">        x++;</span><br><span class="line">        level[getsum(x)]++;</span><br><span class="line">        add(x, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// id[i]=i;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, level[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>一开始题目还读错了，没看懂输入的规律（逃，虽然已经接触了一段时间树状数组了，但不能把思维固定在最基础的题型上，要加强举一反三的能力。</p>
+]]></content>
+      <tags>
+        <tag>竞赛</tag>
+        <tag>算法&amp;数据结构</tag>
+        <tag>树状数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小课堂03-利用好C++特性</title>
+    <url>/2020/02/20/%E5%B0%8F%E8%AF%BE%E5%A0%8203-%E5%88%A9%E7%94%A8%E5%A5%BDC-%E7%89%B9%E6%80%A7/</url>
+    <content><![CDATA[<p>C++在竞赛上用的很多，它运行效率很高，并且不乏一些实用的标准库，这一章就来讲讲C++中竞赛常用的“特性”。</p>
+<a id="more"></a>
+
+<h3 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h3><p>由于这方面内容很多，只列出部分常用的内容。</p>
+<h4 id="vector"><a href="#vector" class="headerlink" title="vector"></a><a href="https://zh.cppreference.com/w/cpp/container/vector" target="_blank" rel="noopener">vector</a></h4><p><strong>向量</strong>，可将其简单理解为动态数组，元素按顺序存储于其中。向量用的比较多，故详细讲解，其它容器的常用成员方法也大都和向量类似。用法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;     // 头文件</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;  <span class="comment">// 命名空间不能忘</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">// 构造</span></span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1;        <span class="comment">// 创建一个空向量v1，尖括号内的类型指定了元素的类型，可以是普通类型、struct、class甚至其他容器</span></span><br><span class="line">  <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(<span class="number">10</span>)</span></span>;    <span class="comment">// 创建一个元素个数为10的向量v2</span></span><br><span class="line">  <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">v3</span><span class="params">(<span class="number">10</span>,<span class="number">0</span>)</span></span>;  <span class="comment">// 创造一个元素个数为10，值均为0的向量v3</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 修改</span></span><br><span class="line">  v1.push_back(<span class="number">10</span>);      <span class="comment">// 将元素10添加到容器末尾</span></span><br><span class="line">  v3.pop_back();         <span class="comment">// 移除末元素</span></span><br><span class="line">  v2[<span class="number">2</span>];                 <span class="comment">// 访问v2中下标为2的元素</span></span><br><span class="line">  v1.clear();            <span class="comment">// 清空v1</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 查询</span></span><br><span class="line">  v1.empty();            <span class="comment">// 判断是否为空</span></span><br><span class="line">  v2.size();             <span class="comment">// 返回v2容纳的元素数</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 迭代器（姑且理解为指针）</span></span><br><span class="line">  v1.begin();            <span class="comment">// 返回指向容器第一个元素的迭代器，类型为vector&lt;int&gt;::iterator</span></span><br><span class="line">  v1.end();              <span class="comment">// 返回指向容器尾端的迭代器</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="set"><a href="#set" class="headerlink" title="set"></a><a href="https://zh.cppreference.com/w/cpp/container/set" target="_blank" rel="noopener">set</a></h4><p><strong>集合</strong>，需要 <code>#include &lt;set&gt;</code> ， <strong>无序存储</strong>，<strong>无重复元素</strong>，并且没有 <code>push_back()</code>方法，使用 <code>insert()</code> 来添加元素。</p>
+<h4 id="stack"><a href="#stack" class="headerlink" title="stack"></a><a href="https://zh.cppreference.com/w/cpp/container/stack" target="_blank" rel="noopener">stack</a></h4><p><strong>栈</strong>，需要 <code>#include &lt;stack&gt;</code> ，使用 <code>top()</code> 来获取栈顶元素，<code>push()</code> 入栈， <code>pop()</code> 出栈。</p>
+<h4 id="queue"><a href="#queue" class="headerlink" title="queue"></a><a href="https://zh.cppreference.com/w/cpp/container/queue" target="_blank" rel="noopener">queue</a></h4><p><strong>队列</strong>，需要 <code>#include &lt;queue&gt;</code> ，使用 <code>front()</code>和 <code>back()</code> 来获取队首、队尾元素，<code>push_back()</code> 和  <code>pop_front()</code> 实现入队、出队。</p>
+<h4 id="map-unsorted-map"><a href="#map-unsorted-map" class="headerlink" title="map/unsorted_map"></a><a href="https://zh.cppreference.com/w/cpp/container/map" target="_blank" rel="noopener">map/unsorted_map</a></h4><blockquote>
+<p>Map是STL的一个关联容器，它提供一对一（其中第一个可以称为关键字，每个关键字只能在map中出现一次，第二个可能称为该关键字的值）的数据处理能力，由于这个特性，它完成有可能在我们处理一对一数据的时候，在编程上提供快速通道。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;  </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;  </span><br><span class="line">  </span><br><span class="line">  <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt; mapStudent;  <span class="comment">// 从int到string的映射，前面的成为key，后面的称为value</span></span><br><span class="line">  mapStudent.insert(pair&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt;(<span class="number">1</span>, <span class="string">"student_one"</span>)); <span class="comment">//使用insert插入，若key重复，则不插入数据，还要留意pair的用法</span></span><br><span class="line">  mapStudent.insert(pair&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt;(<span class="number">2</span>, <span class="string">"student_two"</span>));  </span><br><span class="line">  mapStudent[<span class="number">3</span>]=<span class="string">"student_three"</span>;  <span class="comment">// 用数组方法插入，若key重复，仍执行插入</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;mapStudent[<span class="number">4</span>]&lt;&lt;<span class="built_in">endl</span>;      <span class="comment">// 即便key 4并未赋值，其默认值为""（因为string的默认值是""）</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt;::iterator iter;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span>(iter = mapStudent.begin(); iter != mapStudent.end(); iter++)</span><br><span class="line">  	<span class="built_in">cout</span>&lt;&lt;iter-&gt;first&lt;&lt;<span class="string">' '</span>&lt;&lt;iter-&gt;second&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 注意使用fisrt和second来访问key和value </span></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3>]]></content>
+      <tags>
+        <tag>竞赛</tag>
+        <tag>bo233小课堂</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>考研——从报名到录取</title>
+    <url>/2020/02/20/%E8%80%83%E7%A0%94%E2%80%94%E2%80%94%E4%BB%8E%E6%8A%A5%E5%90%8D%E5%88%B0%E5%BD%95%E5%8F%96/</url>
+    <content><![CDATA[<p>有不少的学校今天都出成绩了，最近也刚好挺关注这方面的消息，并且有很多不明白的地方，就一边梳理一边记录，有错误和疏漏的地方还望指出。</p>
+<a id="more"></a>
+
+<h3 id="报名"><a href="#报名" class="headerlink" title="报名"></a>报名</h3><p>以2019年为例，考研报名分为<strong>9月的「预报名」</strong>和<strong>10月的「正式报名」</strong>。</p>
+<p><strong>预报名只针对应届生</strong>，旨在减少集中报名时的拥挤。虽然不是必须要进行预报名，但为了防止正式报名时系统挤不上去，还是应该报一下。<strong>如果预报名信息确认无误并不需要改动，正式报名时可以不报</strong>。</p>
+<p>不同于高考，<strong>考研只能报名一所学校</strong>。</p>
+<h3 id="初试"><a href="#初试" class="headerlink" title="初试"></a>初试</h3><h4 id="国家线"><a href="#国家线" class="headerlink" title="国家线"></a>国家线</h4><p>这是进入复试的最最基本要求，必须要过，大概类似于一本线。每个一级学科都会有一条分数线，软工属于「工学」，计科属于「工学」和「理学」（不过这好像不重要）。同时根据地区的不同，还分为A、B两类，但江苏是在A类中的，感兴趣可查看<a href="https://baike.baidu.com/item/%E8%80%83%E7%A0%94%E5%9B%BD%E5%AE%B6%E7%BA%BF" target="_blank" rel="noopener">百度百科</a>。工学近几年A类分数线如下，要注意<strong>单科成绩也要过线</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="center">年份</th>
+<th align="center">总分</th>
+<th align="center">政治、英语</th>
+<th align="center">数学、专业课</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">2020</td>
+<td align="center">—</td>
+<td align="center">—</td>
+<td align="center">—</td>
+</tr>
+<tr>
+<td align="center">2019</td>
+<td align="center">270</td>
+<td align="center">39</td>
+<td align="center">59</td>
+</tr>
+<tr>
+<td align="center">2018</td>
+<td align="center">260</td>
+<td align="center">34</td>
+<td align="center">51</td>
+</tr>
+<tr>
+<td align="center">2017</td>
+<td align="center">265</td>
+<td align="center">35</td>
+<td align="center">53</td>
+</tr>
+<tr>
+<td align="center">2016</td>
+<td align="center">265</td>
+<td align="center">36</td>
+<td align="center">54</td>
+</tr>
+<tr>
+<td align="center">2015</td>
+<td align="center">280</td>
+<td align="center">38</td>
+<td align="center">57</td>
+</tr>
+</tbody></table>
+<h4 id="自划线"><a href="#自划线" class="headerlink" title="自划线"></a>自划线</h4><p>34所学校（北大、清华等“至尊985”）可自主确定分数线来<strong>代替国家线</strong>，这似乎和下面的学校线差别不大，令人费解，好在和我没有太大关系。</p>
+<h4 id="学校线"><a href="#学校线" class="headerlink" title="学校线"></a>学校线</h4><p>这就是非常关键的一条线了，只有过了这条线才能参加复试。不过由于专业课多为学校自主命题（408除外），在学校之间比较分数是没有太大意义的。</p>
+<p>每所学校的历年学校线网上能很方便的搜到，不在此赘述。虽然光看分数意义不大，但心里能有个底。</p>
+<p>顺便说一下，<strong>初试出成绩的时候，同时会显示专业排名</strong>。</p>
+<h3 id="复试"><a href="#复试" class="headerlink" title="复试"></a>复试</h3><p>复试目前比较遥远，在此不过多考虑。注意一点，<strong>面试的时候对这个学校这个专业要有一定了解</strong>。</p>
+<h3 id="调剂"><a href="#调剂" class="headerlink" title="调剂"></a>调剂</h3><p>首先强调，<strong>调剂基本上是都没听过的学校</strong>（学姐原话），所以目标学校最好稳一点。如果不得已走到这一步，那也要注意以下几点：</p>
+<ul>
+<li><p>调剂现在是<strong>和复试同期进行</strong>的</p>
+</li>
+<li><p>调剂就看有哪些学校是有空缺名额，所以一定要<strong>趁早</strong>，觉得不稳，出复试线前后就可以去网站申请调剂了（祝愿大家都稳稳的）</p>
+</li>
+<li><p>专业课不同对调剂影响不大，主要看分数</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>考研</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C风格字符串 &amp; string</title>
+    <url>/2020/02/19/C%E9%A3%8E%E6%A0%BC%E5%AD%97%E7%AC%A6%E4%B8%B2-string/</url>
+    <content><![CDATA[<p>先开个坑，有空再补。</p>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小课堂02-基础篇2</title>
+    <url>/2020/02/19/%E5%B0%8F%E8%AF%BE%E5%A0%8202-%E5%9F%BA%E7%A1%80%E7%AF%872/</url>
+    <content><![CDATA[<h3 id="输入输出格式控制"><a href="#输入输出格式控制" class="headerlink" title="输入输出格式控制"></a>输入输出格式控制</h3><h4 id="cin和-cout"><a href="#cin和-cout" class="headerlink" title="cin和 cout"></a>cin和 cout</h4><p>示例：</p>
+<a id="more"></a>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;       // 控制输出格式的头文件在此，别忘！</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;setprecision(<span class="number">5</span>)  <span class="comment">// 前面没有fixed，设置除小数点外有五位有效数字</span></span><br><span class="line">      &lt;&lt;<span class="number">123.456789</span>&lt;&lt;<span class="built_in">endl</span>;  <span class="comment">// 输出123.46，会四舍五入！</span></span><br><span class="line">  </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;setw(<span class="number">10</span>)   <span class="comment">// 设置显示域宽十位</span></span><br><span class="line">      &lt;&lt;setfill(<span class="string">'*'</span>) <span class="comment">// 不足用*补齐，注意setfill的参数是char类型，如果要用0补齐，因写作setfill('0')</span></span><br><span class="line">      &lt;&lt;<span class="number">123.456789</span>&lt;&lt;<span class="built_in">endl</span>; <span class="comment">//输出****123.46  </span></span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;fixed           <span class="comment">// 以固定小数位显示，不要加括号！</span></span><br><span class="line">      &lt;&lt;setprecision(<span class="number">3</span>)   <span class="comment">// 前面有fixed，设置显示三位小数</span></span><br><span class="line">      &lt;&lt;<span class="number">999.123456</span>&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 输出999.123</span></span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意点</strong><br>上述的格式控制方法务必牢记，setprecision()、setw()、setfill()是函数，fixed不是调用函数，不要记错。虽然考试一般不怎么会用到，但一旦题目要求控制格式，格式就不能有任何偏差。</p>
+<h4 id="printf-和-scanf"><a href="#printf-和-scanf" class="headerlink" title="printf 和 scanf"></a>printf 和 scanf</h4><p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;           // 相当于stdio.h，但是C++中应该使用cstdio</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> x=<span class="number">123.456789</span>;</span><br><span class="line">    <span class="keyword">int</span> y=<span class="number">233</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%8.4lf"</span>,x);      <span class="comment">// 有效位数为8（位数不足不用补齐），小数点后4位，123.4567</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%05d"</span>,y);      <span class="comment">// 输出的数字要5位，不足以0补齐，00233</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%-5d"</span>,y);      <span class="comment">// 若位数不足则左对齐，“123  ”，若无负号为“  123”</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>一言蔽之</strong>：小数点前指有效数字（一共输出了几个数字），小数点后指小数位数，0指空位补0，负号指靠左对齐</p>
+<p>补充知识：<br>cin、cout和printf、scanf中还有将变量以八进制、十六进制格式输出的选项，但极少用到，由于上述内容多需记忆，不在此详述，感兴趣可查看<a href="https://bo233.top/2020/02/19/C++八进制、十进制、十六进制的输入输出/">此篇文章</a>。</p>
+<h3 id="指针与数组"><a href="#指针与数组" class="headerlink" title="指针与数组"></a>指针与数组</h3><p>将指针当作数组使用：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>* p;</span><br><span class="line">p=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];      <span class="comment">// 开辟长度为10的数组，并全部初始化为0，注意是中括号！</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// new后面也能跟小括号，不过和此处所述用法没有太大关系</span></span><br><span class="line"><span class="keyword">int</span>* p2;</span><br><span class="line">p2=<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">5</span>);     <span class="comment">// 开辟一个int的空间，并初始化为5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>数组名和首元素指针的区别</strong>：<br>首先补充一个关键词  <strong>sizeof</strong> ，用法例如 <code>sizeof(int)</code> ，返回了 int 所占用的内存空间（当然括号内也可以是某个变量），不过我们不用关心具体的返回值。<br>绝大多数情况下，数组名和首元素指针是没有区别的，但有以下特殊情况：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> nums=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">sizeof</span>(&amp;nums[<span class="number">0</span>]);       <span class="comment">// 结果等于sizeof(int)</span></span><br><span class="line"><span class="keyword">sizeof</span>(nums);           <span class="comment">// 结果等于sizeof(int)*3！即整个数组所占的空间</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="C风格字符串"><a href="#C风格字符串" class="headerlink" title="C风格字符串"></a>C风格字符串</h3><p>C风格字符串即为char数组，但其<strong>最后一个元素一定是’\0’</strong>！<br>一般用string代替C风格字符串，因为C风格字符串的雷区很多。</p>
+<p>常用函数（可略过）：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;  // cstring是string.h头文件中的C++版本，而string.h是C语言提供的标准库</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="built_in">strlen</span>(s);           <span class="comment">// 返回s的长度，不包括字符串结束符'\0'，其原理是从头开始遍历字符串，直到遇到'\0'</span></span><br><span class="line">  <span class="built_in">strcmp</span>(s1, s2);</span><br><span class="line">  <span class="built_in">strcat</span>(s1, s2);      <span class="comment">// 将字符串s2连接到s1后，并返回s1 </span></span><br><span class="line">  <span class="built_in">strcpy</span>(s1, s2);      <span class="comment">// 将s2复制给s1，并返回s1</span></span><br><span class="line">  <span class="built_in">strncat</span>(s1, s2, n);  <span class="comment">// 将s2的前n个字符连接到s1后面，并返回s1</span></span><br><span class="line">  <span class="built_in">strncpy</span>(s1, s2, n);  <span class="comment">// 将s2的前n个字符复制给s1，并返回s1</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *cp1 = <span class="string">"A string example"</span>;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *cp2 = <span class="string">"A different string"</span>;</span><br><span class="line">  <span class="keyword">if</span>(cp1 &lt; cp2)        <span class="comment">// 比较两个指针的地址，而非比较字符串内容</span></span><br><span class="line">		;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">int</span> i=<span class="built_in">strcmp</span>(cp1, cp2);   <span class="comment">// i为正数</span></span><br><span class="line">  i=<span class="built_in">strcmp</span>(cp2, cp1);       <span class="comment">// i为负数</span></span><br><span class="line">  i=<span class="built_in">strcmp</span>(cp1, cp1);       <span class="comment">// i为0</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="switch-语句"><a href="#switch-语句" class="headerlink" title="switch 语句"></a>switch 语句</h3><p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="comment">// 局部变量声明</span></span><br><span class="line">   <span class="keyword">char</span> grade = <span class="string">'D'</span>;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">switch</span>(grade)&#123;   <span class="comment">// 要判断的变量，不能忘记大括号</span></span><br><span class="line">   <span class="keyword">case</span> <span class="string">'A'</span> :            <span class="comment">// case和’A’之间要有空格，后面要有冒号</span></span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"很棒！"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">      <span class="keyword">break</span>;             <span class="comment">//可选，一般都有</span></span><br><span class="line">   <span class="keyword">case</span> <span class="string">'B'</span> :</span><br><span class="line">   <span class="keyword">case</span> <span class="string">'C'</span> :</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"做得好"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">   <span class="keyword">case</span> <span class="string">'D'</span> :</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"您通过了"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">   <span class="keyword">case</span> <span class="string">'F'</span> :</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"最好再试一下"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">   <span class="keyword">default</span> : <span class="comment">// 可选，所有未出现过的值</span></span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"无效的成绩"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="struct"><a href="#struct" class="headerlink" title="struct"></a>struct</h3><p>定义方法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Books</span>               // 定义结构图</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">char</span>  title[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  author[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  subject[<span class="number">100</span>];</span><br><span class="line">   <span class="keyword">int</span>   book_id;</span><br><span class="line">&#125; ;  <span class="comment">// 这里有个分号！</span></span><br><span class="line"></span><br><span class="line">Books book1;   <span class="comment">// 申明实体，C语言中规定前面要加 struct，即 struct Books book1 ,但C++中可不加</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="typedef"><a href="#typedef" class="headerlink" title="typedef"></a>typedef</h3><p>用法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;    <span class="comment">// 输入long long太麻烦，定义ll即为long long</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><p>用法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> num=<span class="number">10</span>;          <span class="comment">// num变量的值不能改变，并且要在其申明时赋初值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面的有点绕，但最好分清</span></span><br><span class="line"><span class="keyword">int</span>* <span class="keyword">const</span> p1=&amp;num;     <span class="comment">// p1只能指向num</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>* p2=&amp;num;     <span class="comment">// 不能通过p2来修改num的值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><ul>
+<li><p>程序改错，思考num2和num3输出结果的原因，将程序的输出结果改为三个0:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> nums1[<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> nums2[<span class="number">4</span>];</span><br><span class="line">  <span class="keyword">int</span> *num3=<span class="keyword">new</span>(<span class="number">4</span>);</span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;nums1[<span class="number">2</span>]&lt;&lt;nums2[<span class="number">2</span>]&lt;&lt;nums3[<span class="number">2</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设计一个程序，输入两个整数，输出它们的商，要求保留小数点后两位，并且宽度为6，不足用0补齐</p>
+</li>
+<li><p>设计一个程序，输入一个整数作为操作命令，输出其相对应的响应，（1:向左，2:向右，其他：错误）</p>
+</li>
+<li><p><a href="https://www.luogu.com.cn/problem/P1179" target="_blank" rel="noopener">https://www.luogu.com.cn/problem/P1179</a></p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>竞赛</tag>
+        <tag>bo233小课堂</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++ 八进制、十进制、十六进制的输入输出</title>
+    <url>/2020/02/19/C++%E5%85%AB%E8%BF%9B%E5%88%B6%E3%80%81%E5%8D%81%E8%BF%9B%E5%88%B6%E3%80%81%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/</url>
+    <content><![CDATA[<p>在C++中，默认状态下，数据按十进制输入输出。如果要求按八进制或十六进制输入输出，在输入输出中必须指明相应的数据形式，oct为八进制，hex为十六进制，dec为十进制。但是二进制没有默认的输出格式。</p>
+<a id="more"></a>
+
+<h3 id="cin-和-cout"><a href="#cin-和-cout" class="headerlink" title="cin 和 cout"></a>cin 和 cout</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> i；</span><br><span class="line"></span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;oct&gt;&gt;i;  <span class="comment">// 输入为八进制数</span></span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;hex&gt;&gt;i;  <span class="comment">// 输入为十六进制数</span></span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;i;       <span class="comment">// 输入仍为十六进制数</span></span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;dec&gt;&gt;i;  <span class="comment">// 输入为十进制数</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;hex&lt;&lt;i&lt;&lt;<span class="built_in">endl</span>;  <span class="comment">// 输出为十六进制</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;dec&lt;&lt;&lt;i&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 输出为十进制</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;oct&lt;&lt;i;        <span class="comment">// 输出为八进制</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;dec&lt;&lt;<span class="built_in">endl</span>;     <span class="comment">// 恢复十进制数输出状态</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="printf-和-scanf"><a href="#printf-和-scanf" class="headerlink" title="printf 和 scanf"></a>printf 和 scanf</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> i；</span><br><span class="line"></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%o"</span>, &amp;i); <span class="comment">// 输入为八进制</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%x"</span>, &amp;i); <span class="comment">// 输入为十六进制</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;i); <span class="comment">// 输入为十进制</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, i); <span class="comment">// 输出为十进制</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%o"</span>, i); <span class="comment">// 输出为八进制</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%x"</span>, i); <span class="comment">// 输出为十六进制</span></span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <tags>
+        <tag>C++</tag>
+        <tag>竞赛</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小课堂01-基础篇1</title>
+    <url>/2020/02/19/%E5%B0%8F%E8%AF%BE%E5%A0%8201-%E5%9F%BA%E7%A1%80%E7%AF%871/</url>
+    <content><![CDATA[<p><em>“小课堂”系列旨在针对蓝桥杯等比赛、考试进行快速入门，以及帮助「学过但记忆模糊」的同学快速唤醒脑海中的知识。</em></p>
+<a id="more"></a>
+
+<p><em>注意事项：</em><br><em>1.推荐使用 <a href="https://sourceforge.net/projects/orwelldevcpp/" target="_blank" rel="noopener">Dev-C++ 4.9</a> 或 <a href="https://pan.baidu.com/s/1cJEgCzmVXx-tfyCokkU93w" target="_blank" rel="noopener">Dev-C++ 5.4</a> （蓝桥杯使用此IDE），不推荐使用 Visual Studio。</em><br><em>2.推荐参考资料：<a href="https://www.runoob.com/cplusplus/cpp-tutorial.html" target="_blank" rel="noopener">菜鸟教程</a> （系统、详细的教程，可作为补充学习），CSDN、CnBlog（有什么问题可以搜了看这上面的解答）</em><br><em>3.教程所讲内容应全部掌握，记在脑中</em><br><em>4.课程中的题目务必完成</em></p>
+<h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><h4 id="cin-和-cout"><a href="#cin-和-cout" class="headerlink" title="cin 和 cout"></a>cin 和 cout</h4><p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;               // 包含在iostream中</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;             <span class="comment">// 命名空间不能忘，忘了就报错</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> x;</span><br><span class="line">  <span class="built_in">cin</span>&gt;&gt;x;                        <span class="comment">// 输入用「&gt;&gt;」，并且千万不能跟endl</span></span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;<span class="string">"hello,world"</span>&lt;&lt;<span class="built_in">endl</span>;     <span class="comment">// 输出用「&lt;&lt;」，endl用于换行</span></span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;<span class="string">"The value of x is: "</span>&lt;&lt;x;<span class="comment">// 不用指定类型</span></span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;                    <span class="comment">// 建议总是在最后一次输出后加上endl</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关于cin和cout的输入输出格式控制，会在下一节课讲。</p>
+<h4 id="printf-和-scanf"><a href="#printf-和-scanf" class="headerlink" title="printf 和 scanf"></a>printf 和 scanf</h4><p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;         // 包含在cstdio中，相当于stdio.h，但C++中应该使用cstdio，没有后缀！</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> x = <span class="number">5</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Number = %d"</span>, x);     <span class="comment">// 整数输入输出用%d，输出后面跟变量</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">float</span> f;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%f"</span>, &amp;f);              <span class="comment">// 浮点数用%f，输入后面跟地址&amp;f</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">double</span> d=<span class="number">2.33</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%lf"</span>, d);             <span class="comment">// 双精度用%lf</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">char</span> c;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;c);              <span class="comment">// 字符用%c</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">string</span> s=<span class="string">"hello"</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%s"</span>, s);              <span class="comment">// 字符串用%s</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"\n"</span>);                 <span class="comment">// 换行，只能在输出时用！输入时千万不能用！</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一定要牢记上述几种<strong>常用类型的控制符</strong>，<strong>输入时后面跟地址</strong>，<strong>输出时后面跟变量</strong>，并且<strong>控制符要包含在引号中</strong>。</p>
+<p>关于printf和scanf的输入输出格式控制，会在下一节课讲。</p>
+<h3 id="文件输入输出"><a href="#文件输入输出" class="headerlink" title="文件输入输出"></a>文件输入输出</h3><h4 id="fprintf-和-fscanf"><a href="#fprintf-和-fscanf" class="headerlink" title="fprintf 和 fscanf"></a>fprintf 和 fscanf</h4><p><strong>示例</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt; // 因为用到了string，所以要包含这个头文件，具体用法会在后面讲到</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	FILE * fp; <span class="comment">// 注意！是FILE*，不要忘了「星号」</span></span><br><span class="line">	</span><br><span class="line">	fp = fopen (<span class="string">"file.txt"</span>, <span class="string">"w+"</span>); <span class="comment">// 不要忘记把返回值赋给fp</span></span><br><span class="line">	<span class="built_in">fprintf</span>(fp, <span class="string">"%s %d"</span>, <span class="string">"hello,world"</span>, <span class="number">2019</span>); <span class="comment">// 将一个字符串和一个整数存入file.txt</span></span><br><span class="line">	</span><br><span class="line">  <span class="built_in">string</span> str;</span><br><span class="line">  <span class="keyword">int</span> year;</span><br><span class="line">  <span class="built_in">fscanf</span>(fp, <span class="string">"%s%d"</span>, str, &amp;year); <span class="comment">// 此时str被赋值为“hello,world”，year被赋值为2019</span></span><br><span class="line">  </span><br><span class="line">  fclose(fp);</span><br><span class="line">   </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>fopen常用的文件访问模式（即第二个参数）</strong></p>
+<ul>
+<li><strong>w+</strong>：创建一个可读写的空文件，如果已存在同名文件，则<strong>会删除已有文件的内容</strong></li>
+<li><strong>a+</strong>：打开一个用于读取和<strong>追加</strong>的文件，如果文件不存在，则<strong>创建文件</strong></li>
+</ul>
+<p><strong>注意点</strong></p>
+<p>使用方法基本与printf、scanf一样，但要注意以下几点：</p>
+<ul>
+<li>在使用文件前要调用<strong>fopen</strong>打开文件，并且将返回值复制给一个<strong>FILE*</strong>类型的变量fp</li>
+<li>文件使用完后要调用fclose，注意要传入一个<strong>FILE*</strong>类型的变量fp</li>
+<li>调用fprintf和fscanf时传入的第一个参数是fp</li>
+</ul>
+<h4 id="fstream-中的函数（C-特有）"><a href="#fstream-中的函数（C-特有）" class="headerlink" title="fstream 中的函数（C++特有）"></a>fstream 中的函数（C++特有）</h4><p><strong>示例</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt; // 包含在头文件fstream中</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">   <span class="comment">// 以写模式打开文件</span></span><br><span class="line">   ofstream fout;</span><br><span class="line">   fout.open(<span class="string">"file.txt"</span>);</span><br><span class="line">  </span><br><span class="line">   fout &lt;&lt; “hello,world” &lt;&lt; <span class="number">2019</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 向文件写入用户输入的数据</span></span><br><span class="line">   fout.close(); <span class="comment">// 关闭打开的文件</span></span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">   <span class="comment">// 以读模式打开文件</span></span><br><span class="line">   ifstream fin; </span><br><span class="line">   fin.open(<span class="string">"file.txt"</span>); </span><br><span class="line"> </span><br><span class="line">   <span class="built_in">string</span> str;</span><br><span class="line">   <span class="keyword">int</span> year;</span><br><span class="line">   fin &gt;&gt; str &gt;&gt; year; <span class="comment">// 此时str被赋值为“hello,world”，year被赋值为2019</span></span><br><span class="line">   fin.close();</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意点</strong></p>
+<p>使用方法和cin、cout基本一样，但有以下注意点：</p>
+<ul>
+<li>读写要用不同的流对象（<strong>ofstream 和 ifstream</strong>），对象的名字可以随意起，但要<strong>注意与文件、读写模式对应</strong></li>
+<li>创建好流对象后，要用<strong>「成员函数 open」</strong> 打开指定文件，一定注意要以 <strong>「fout.open(PATH)」</strong> 形式调用，不要和上面的 fopen 搞混了</li>
+</ul>
+<h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><h4 id="for"><a href="#for" class="headerlink" title="for"></a>for</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(变量赋值; 循环继续的条件; 每次迭代的变量更新)</span><br></pre></td></tr></table></figure>
+
+<h4 id="break-和-continue"><a href="#break-和-continue" class="headerlink" title="break 和 continue"></a>break 和 continue</h4><p><strong>break</strong>：跳出break语句所在的循环体<br><strong>continue</strong>：不执行continue语句后的语句，直接开始下一轮循环</p>
+<h4 id="while-和-do-while"><a href="#while-和-do-while" class="headerlink" title="while 和 do while"></a>while 和 do while</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(循环的条件)&#123; <span class="comment">// 先判断再执行</span></span><br><span class="line">	<span class="comment">//TODO</span></span><br><span class="line">&#125;  <span class="comment">// 看这里！！！没有分号！！！</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span>&#123; <span class="comment">// 先执行再判断</span></span><br><span class="line">	<span class="comment">//TODO</span></span><br><span class="line">&#125; <span class="keyword">while</span>(循环继续的条件); <span class="comment">// 看这里！！！有分号！！！</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p>示例（如果太绕，可以先忽略小括号中的内容）：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> x=<span class="number">2</span>;         <span class="comment">// 假设变量存放在地址0x233处</span></span><br><span class="line"><span class="keyword">int</span>* p=&amp;x;       <span class="comment">// 用「int*」定义一个「指向整型的指针」p，用「取地址运算符&amp;」将x的地址赋值给指针p</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;p&lt;&lt;<span class="built_in">endl</span>;   <span class="comment">// 输出x的地址（或称为p指针的值）0x233</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;*p&lt;&lt;<span class="built_in">endl</span>;  <span class="comment">// 输出x的值（或称为p指针指向的值）2</span></span><br></pre></td></tr></table></figure>
+
+<p>⚠️<strong>注意：</strong>void*不是「指向void变量的指针」，而是「可以指向任意类型变量的指针」，例如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *a；</span><br><span class="line"><span class="keyword">void</span> *p；</span><br><span class="line">p=a；</span><br></pre></td></tr></table></figure>
+
+
+
+<p>指针看似简单，实则复杂，会在后续课程中陆续补充。</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> num1[<span class="number">4</span>];               <span class="comment">// 全局变量，默认赋值为0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;            </span><br><span class="line">  <span class="keyword">int</span> num2[<span class="number">4</span>]=&#123;<span class="number">0</span>&#125;;         <span class="comment">// 局部变量一定要记得手动赋初始值，只给其中部分元素赋值，那其他元素默认赋0</span></span><br><span class="line">  <span class="keyword">int</span> *num3=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>](<span class="number">0</span>); <span class="comment">// new得到的数组也要手动赋初值</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>考虑这样一个问题：读入十个整数，逆序输出到一行中。（动手写一写）</p>
+<p>思考以下问题（下节课会解答）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int nums[10];</span><br><span class="line">nums;</span><br><span class="line">&amp;nums[0]; &#x2F;&#x2F;nums和&amp;nums[0]有何异同？</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><h4 id="C风格字符串"><a href="#C风格字符串" class="headerlink" title="C风格字符串"></a>C风格字符串</h4><p>下堂课讲</p>
+<h4 id="string"><a href="#string" class="headerlink" title="string"></a>string</h4><p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;    // 包含在string头文件中，不能忘！</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="built_in">string</span> str1 = <span class="string">"Hello"</span>;</span><br><span class="line">   <span class="built_in">string</span> str2 = <span class="string">"World"</span>;</span><br><span class="line">   <span class="built_in">string</span> str3;</span><br><span class="line">   <span class="keyword">int</span> len ;</span><br><span class="line"> </span><br><span class="line">   <span class="built_in">cout</span>&lt;&lt;str1[<span class="number">0</span>]&lt;&lt;<span class="built_in">endl</span>;  <span class="comment">//输出str1的第一个字符'H'</span></span><br><span class="line">   <span class="comment">// 复制 str1 到 str3</span></span><br><span class="line">   str3 = str1;</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"str3 : "</span> &lt;&lt; str3 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">   <span class="comment">// 连接 str1 和 str2</span></span><br><span class="line">   str3 = str1 + str2;</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"str1 + str2 : "</span> &lt;&lt; str3 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">   <span class="comment">// 连接后，str3 的总长度</span></span><br><span class="line">   len = str3.size();</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"str3.size() :  "</span> &lt;&lt; len &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>string使用起来十分简单方便，一般情况下用string作为字符串就行。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>函数返回类型    函数名(参数类型1  形参名1，参数类型2  形参名2)  {代码段}</p>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a&gt;b)</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>⚠️<strong>注意：</strong>C++中的函数参数都是<strong>按值传递</strong>！</p>
+<p>什么是按值传递：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">  x=x+<span class="number">1</span>;</span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main&#123;</span><br><span class="line">  <span class="keyword">int</span> a=<span class="number">2</span>;</span><br><span class="line">  func(a); <span class="comment">// 输出3</span></span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;a; <span class="comment">// 输出2，func函数对x的改变不影响a</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><ul>
+<li><p>从键盘输入一个任意长的字符串，设计一个将函数倒序排列的函数stringReverse，将倒序后的结果存入“ans.txt”文件</p>
+</li>
+<li><p><a href="https://www.luogu.com.cn/problem/P1425" target="_blank" rel="noopener">https://www.luogu.com.cn/problem/P1425</a></p>
+</li>
+<li><p>修改以下代码，使得a变量的值会因为add函数的执行而加1（使用指针，不要改变函数的返回类型）：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">  x=x+<span class="number">1</span>;</span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;<span class="string">"x: "</span>&lt;&lt;x&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> a=<span class="number">2</span>;</span><br><span class="line">  add(a);</span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;<span class="string">"a: "</span>&lt;&lt;a&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>竞赛</tag>
+        <tag>bo233小课堂</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>POJ2299-Ultra-QuickSort</title>
+    <url>/2020/02/19/POJ2299-Ultra-QuickSort/</url>
+    <content><![CDATA[<p><a href="http://poj.org/problem?id=2299" target="_blank" rel="noopener">题目链接</a></p>
+<h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>给一组正整数，采用冒泡排序，求排序过程中交换的次数。</p>
+<a id="more"></a>
+
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>题目表述得很玄乎，但其实这就是求逆序的数量。</p>
+<h4 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h4><p>树状数组是一种用于高效处理对一个存储数字的列表进行更新及求前缀和的数据结构，可以以 $O(\log n)$ 的效率来执行更新和求和。</p>
+<p>下面是板子：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) x&amp;-(x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 50005</span></span><br><span class="line"><span class="keyword">int</span> tree[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> delta)</span></span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=x; i&lt;=MAXN; i+=lowbit(x)) <span class="comment">// 注意，i要小于等于MAXN</span></span><br><span class="line">    tree[i]+=delta;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> sum;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=x; i&gt;<span class="number">0</span>; i-=lowbit(x))</span><br><span class="line">    sum+=tree[i];</span><br><span class="line"> 	<span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，树状数组要求<strong>下标从1开始</strong>。</p>
+<h4 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h4><p>由于题目的输入范围太大，直接开数组肯定会爆内存，需要将输入的数离散化（可以理解为给每个数一个独一无二的id，并且这个id的范围不会太大），根据id的范围来开数组，就不会爆内存。至于排序，我们也可以对id来间接排序。</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL __int64</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> tree[<span class="number">500050</span>],nums[<span class="number">500050</span>],id[<span class="number">500050</span>],N = <span class="number">500050</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> x,<span class="keyword">const</span> <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> nums[x] &lt; nums[y];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) x&amp;-(x)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= N)&#123;</span><br><span class="line">        tree[i] += x;</span><br><span class="line">        i += lowbit(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">LL <span class="title">sum</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    LL sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(n &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        sum += tree[n];</span><br><span class="line">        n -= lowbit(n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; N &amp;&amp; N)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; nums[i];</span><br><span class="line">            id[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(id+<span class="number">1</span>,id+N+<span class="number">1</span>,cmp);  <span class="comment">//间接排序，将编号根据对应数值排序</span></span><br><span class="line"><span class="comment">//        for(int i = 1; i &lt;= N; ++i)</span></span><br><span class="line"><span class="comment">//            cout &lt;&lt; nums[i] &lt;&lt; ' ' &lt;&lt; id[i] &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line">        LL ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123; <span class="comment">//求逆序数</span></span><br><span class="line">            add(id[i],<span class="number">1</span>);</span><br><span class="line">            ans += i - sum(id[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>之前一直在想，用前缀和来求区间和不是也很快，为什么还要用<strong>树状数组</strong>，后来明白，往往是需要频繁地“更新”操作，树状数组在更新的时候复杂度是 $O(\log n)$ ，比前缀和快。</p>
+<p>一开始不明白为什么会要用到id数组，看题解后明白，因为输入范围比较大，不好直接开数组记录每个数出现与否，所以要将输入的数与一个id对应，这样可以通过对id进行排序，从而间接得到排序后的数组。</p>
+<p>树状数组要求输入为<strong>正数</strong>，如果输入的数中有小于等于0的情况，要转换为正数。</p>
+]]></content>
+      <tags>
+        <tag>竞赛</tag>
+        <tag>算法&amp;数据结构</tag>
+        <tag>树状数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>POJ1195-Mobile phones</title>
+    <url>/2020/02/19/POJ1195-Mobile-phones/</url>
+    <content><![CDATA[<p><a href="http://poj.org/problem?id=1195" target="_blank" rel="noopener">题目链接</a></p>
+<h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>有S*S台基站排列成正方形，每台基站都会记录连接它的手机数，并且该数目随时可能变化。要求输出指定矩形区域内连接手机的总数。</p>
+<a id="more"></a>
+
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>由于 S 很大，矩形区域也可能很大，使用双重循环来计算总数会超市，所以需要一种特殊的数据结构：<strong>二维树状数组</strong>。与一维树状数组原理相同，假设二维数组为：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">a[][]=&#123;</span><br><span class="line">	&#123;a11,a12,a13,a14,a15,a16,a17,a18&#125;,</span><br><span class="line">	&#123;a21,a22,a23,a24,a25,a26,a27,a28&#125;,</span><br><span class="line">	&#123;a31,a32,a33,a34,a35,a36,a37,a38&#125;,</span><br><span class="line">	&#123;a41,a42,a43,a44,a45,a46,a47,a48&#125;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>那么树状数组C：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">C[<span class="number">1</span>][<span class="number">1</span>]=a11, C[<span class="number">1</span>][<span class="number">2</span>]=a11+a12;</span><br><span class="line">C[<span class="number">2</span>][<span class="number">1</span>]=a11+a21, C[<span class="number">2</span>][<span class="number">2</span>]=a11+a12+a21+a22;</span><br><span class="line">C[<span class="number">3</span>][<span class="number">1</span>]=a31, C[<span class="number">3</span>][<span class="number">2</span>]=a31+a32;</span><br><span class="line">C[<span class="number">4</span>][<span class="number">1</span>]=a11+a21+a31+a41, C[<span class="number">4</span>][<span class="number">2</span>]=a11+a12+a21+a22+a31+a32+a41+a42；</span><br></pre></td></tr></table></figure>
+
+<p>可以看出，不管是每一行还是每一列，树状数组C都符合x+=lowbit(x)，所以只需要按下图所示的顺序进行一维的add，就能实现二维树状数组的add。</p>
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc1iz7ftrpj30pq0ks0w0.jpg" alt="IMG_0076" style="zoom:33%;" />
+
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN=<span class="number">1025</span>;</span><br><span class="line"><span class="keyword">int</span> tree[MAXN][MAXN];</span><br><span class="line"><span class="keyword">int</span> s;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) x&amp;-(x)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=x, j=y;</span><br><span class="line">    <span class="keyword">while</span>(j&lt;=s)&#123;</span><br><span class="line">        i=x;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;=s)&#123;</span><br><span class="line">            tree[j][i]+=d;</span><br><span class="line">            i+=lowbit(i);</span><br><span class="line">        &#125;</span><br><span class="line">        j+=lowbit(j);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getsum</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=y; i&gt;<span class="number">0</span>; i-=lowbit(i))</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=x; j&gt;<span class="number">0</span>; j-=lowbit(j))</span><br><span class="line">            sum+=tree[i][j];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;s, &amp;s);</span><br><span class="line">    <span class="keyword">int</span> ins=<span class="number">0</span>,x,y,a,l,b,r,t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;ins);</span><br><span class="line">    <span class="keyword">while</span>(ins!=<span class="number">3</span>)&#123;</span><br><span class="line">        <span class="keyword">switch</span>(ins)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>: <span class="comment">//add</span></span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;x, &amp;y, &amp;a);</span><br><span class="line">                x++,y++;</span><br><span class="line">                add(x, y, a);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>, &amp;l, &amp;b, &amp;r, &amp;t);</span><br><span class="line">                l++,r++,b++,t++; <span class="comment">//⚠️注意，这里要++，因为输入的坐标可能为0</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getsum(r,t)-getsum(l<span class="number">-1</span>,t)-getsum(r,b<span class="number">-1</span>)+getsum(l<span class="number">-1</span>,b<span class="number">-1</span>)); <span class="comment">//⚠️注意，部分地方要-1</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;ins);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h3><p>需要注意的点已经在代码中标注出来，还是要牢记，<strong>树状数组的下标从1开始</strong>，这一点千万不能忘记。在计算区域和的时候也要注意，<code>getsum(r,t)-getsum(l-1,t)-getsum(r,b-1)+getsum(l-1,b-1)</code>，哪里要减1哪里不需要，要想明白。</p>
+]]></content>
+      <tags>
+        <tag>竞赛</tag>
+        <tag>算法&amp;数据结构</tag>
+        <tag>树状数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GitHub 加速</title>
+    <url>/2020/02/18/GitHub%E5%8A%A0%E9%80%9F/</url>
+    <content><![CDATA[<p>无论是访问GitHub还是用 git 来克隆仓库，由于种种原因，速度都感人的不行，最头疼的是就算开了全局代理，用处似乎也不大。花了一些时间，在网上找到了解决办法。</p>
+<a id="more"></a>
+
+<h3 id="GitHub网站访问加速"><a href="#GitHub网站访问加速" class="headerlink" title="GitHub网站访问加速"></a>GitHub网站访问加速</h3><p>原本只是在 PAC 列表里加上了github.com，后来发现由于GitHub还需要用到githubxxx.com的链接，便又加入 github*.com，速度一下就上来了。</p>
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc0xole0c3j30qa08uq5m.jpg" alt="image-20200218224159818" style="zoom:50%;" />
+
+<h3 id="Git-克隆-GitHub-仓库加速"><a href="#Git-克隆-GitHub-仓库加速" class="headerlink" title="Git 克隆 GitHub 仓库加速"></a>Git 克隆 GitHub 仓库加速</h3><p>然鹅上述方法对 git 是没用的。首先先找到代理的监听端口，一般都是1080+，我这里是1086。</p>
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc0xsar00yj30qg0gm418.jpg" alt="image-20200218224534060" style="zoom:50%;" />
+
+<p>然后在终端中输入：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> socks5协议，1086端口修改成自己的本地代理端口</span></span><br><span class="line">git config --global http.https://github.com.proxy socks5://127.0.0.1:1086</span><br><span class="line">git config --global https.https://github.com.proxy socks5://127.0.0.1:1086</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> http协议，1086端口修改成自己的本地代理端口</span></span><br><span class="line">git config --global http.https://github.com.proxy https://127.0.0.1:1086</span><br><span class="line">git config --global https.https://github.com.proxy https://127.0.0.1:1086</span><br></pre></td></tr></table></figure>
+
+<p>这样一来，GitHub流量就能走代理了，速度能上1M/s。</p>
+]]></content>
+      <tags>
+        <tag>技巧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第一篇文章</title>
+    <url>/2020/02/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<p>总算是搭好了自己的Blog。</p>
+<a id="more"></a>
+
+<p>其实本对服务器啊、网站啊、博客这些不是很感兴趣，觉得在本地写写Markdown就够了，但放在本地似乎比较零散，也没什么动力去写，那就干脆自己搭个Blog吧，虽迟但到hh。</p>
+<p>也去搜了一些资料，琢磨以何种形式搭建Blog。对于CSDN、CNBlog之类的现成平台，我是比较抗拒的，虽然很方便，但是没有了「自己搭建的灵魂」。采用GitHub Page➕hexo，问题也很明显——麻烦，就连评论系统都需要自己倒腾。当然对于我来说，这种折腾本是一种乐趣，并不排斥（毕竟写Blog也很麻烦hh）。不止这点，诸如加载速度慢、不能随处编写文章、搜索引擎上几乎无法被搜到，这些问题我也很清楚，但我并不是想要凭此来像别人炫耀什么，我所需要的仅仅是一个可以把本地文档组织起来的平台，便于在小范围内共享知识，默默记录自己的学习历程，能做到这些就够了。</p>
+<p>从小半途而废的事情实在是太多了，希望这一次能坚持下去，能以这样一种方式和角度，给成长留下一点印记。</p>
+]]></content>
+      <tags>
+        <tag>杂记</tag>
+      </tags>
+  </entry>
+</search>

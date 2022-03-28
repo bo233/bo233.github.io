@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bo233.top","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="输入输出格式控制cin和 cout示例：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小课堂02-基础篇2">
+<meta property="og:url" content="http://bo233.top/2020/02/19/%E5%B0%8F%E8%AF%BE%E5%A0%8202-%E5%9F%BA%E7%A1%80%E7%AF%872/index.html">
+<meta property="og:site_name" content="Bo233&#39;s Blog">
+<meta property="og:description" content="输入输出格式控制cin和 cout示例：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-19T12:46:12.000Z">
+<meta property="article:modified_time" content="2020-02-20T14:52:19.231Z">
+<meta property="article:author" content="bo233">
+<meta property="article:tag" content="竞赛">
+<meta property="article:tag" content="bo233小课堂">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bo233.top/2020/02/19/%E5%B0%8F%E8%AF%BE%E5%A0%8202-%E5%9F%BA%E7%A1%80%E7%AF%872/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>小课堂02-基础篇2 | Bo233's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bo233's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bo233.top/2020/02/19/%E5%B0%8F%E8%AF%BE%E5%A0%8202-%E5%9F%BA%E7%A1%80%E7%AF%872/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bo233">
+      <meta itemprop="description" content="码，码不停题。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bo233's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          小课堂02-基础篇2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-19 20:46:12" itemprop="dateCreated datePublished" datetime="2020-02-19T20:46:12+08:00">2020-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-20 22:52:19" itemprop="dateModified" datetime="2020-02-20T22:52:19+08:00">2020-02-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="输入输出格式控制"><a href="#输入输出格式控制" class="headerlink" title="输入输出格式控制"></a>输入输出格式控制</h3><h4 id="cin和-cout"><a href="#cin和-cout" class="headerlink" title="cin和 cout"></a>cin和 cout</h4><p>示例：</p>
+<a id="more"></a>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;       // 控制输出格式的头文件在此，别忘！</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;setprecision(<span class="number">5</span>)  <span class="comment">// 前面没有fixed，设置除小数点外有五位有效数字</span></span><br><span class="line">      &lt;&lt;<span class="number">123.456789</span>&lt;&lt;<span class="built_in">endl</span>;  <span class="comment">// 输出123.46，会四舍五入！</span></span><br><span class="line">  </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;setw(<span class="number">10</span>)   <span class="comment">// 设置显示域宽十位</span></span><br><span class="line">      &lt;&lt;setfill(<span class="string">'*'</span>) <span class="comment">// 不足用*补齐，注意setfill的参数是char类型，如果要用0补齐，因写作setfill('0')</span></span><br><span class="line">      &lt;&lt;<span class="number">123.456789</span>&lt;&lt;<span class="built_in">endl</span>; <span class="comment">//输出****123.46  </span></span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;fixed           <span class="comment">// 以固定小数位显示，不要加括号！</span></span><br><span class="line">      &lt;&lt;setprecision(<span class="number">3</span>)   <span class="comment">// 前面有fixed，设置显示三位小数</span></span><br><span class="line">      &lt;&lt;<span class="number">999.123456</span>&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 输出999.123</span></span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意点</strong><br>上述的格式控制方法务必牢记，setprecision()、setw()、setfill()是函数，fixed不是调用函数，不要记错。虽然考试一般不怎么会用到，但一旦题目要求控制格式，格式就不能有任何偏差。</p>
+<h4 id="printf-和-scanf"><a href="#printf-和-scanf" class="headerlink" title="printf 和 scanf"></a>printf 和 scanf</h4><p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;           // 相当于stdio.h，但是C++中应该使用cstdio</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> x=<span class="number">123.456789</span>;</span><br><span class="line">    <span class="keyword">int</span> y=<span class="number">233</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%8.4lf"</span>,x);      <span class="comment">// 有效位数为8（位数不足不用补齐），小数点后4位，123.4567</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%05d"</span>,y);      <span class="comment">// 输出的数字要5位，不足以0补齐，00233</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%-5d"</span>,y);      <span class="comment">// 若位数不足则左对齐，“123  ”，若无负号为“  123”</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>一言蔽之</strong>：小数点前指有效数字（一共输出了几个数字），小数点后指小数位数，0指空位补0，负号指靠左对齐</p>
+<p>补充知识：<br>cin、cout和printf、scanf中还有将变量以八进制、十六进制格式输出的选项，但极少用到，由于上述内容多需记忆，不在此详述，感兴趣可查看<a href="https://bo233.top/2020/02/19/C++八进制、十进制、十六进制的输入输出/">此篇文章</a>。</p>
+<h3 id="指针与数组"><a href="#指针与数组" class="headerlink" title="指针与数组"></a>指针与数组</h3><p>将指针当作数组使用：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* p;</span><br><span class="line">p=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];      <span class="comment">// 开辟长度为10的数组，并全部初始化为0，注意是中括号！</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// new后面也能跟小括号，不过和此处所述用法没有太大关系</span></span><br><span class="line"><span class="keyword">int</span>* p2;</span><br><span class="line">p2=<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">5</span>);     <span class="comment">// 开辟一个int的空间，并初始化为5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>数组名和首元素指针的区别</strong>：<br>首先补充一个关键词  <strong>sizeof</strong> ，用法例如 <code>sizeof(int)</code> ，返回了 int 所占用的内存空间（当然括号内也可以是某个变量），不过我们不用关心具体的返回值。<br>绝大多数情况下，数组名和首元素指针是没有区别的，但有以下特殊情况：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nums=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">sizeof</span>(&amp;nums[<span class="number">0</span>]);       <span class="comment">// 结果等于sizeof(int)</span></span><br><span class="line"><span class="keyword">sizeof</span>(nums);           <span class="comment">// 结果等于sizeof(int)*3！即整个数组所占的空间</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="C风格字符串"><a href="#C风格字符串" class="headerlink" title="C风格字符串"></a>C风格字符串</h3><p>C风格字符串即为char数组，但其<strong>最后一个元素一定是’\0’</strong>！<br>一般用string代替C风格字符串，因为C风格字符串的雷区很多。</p>
+<p>常用函数（可略过）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;  // cstring是string.h头文件中的C++版本，而string.h是C语言提供的标准库</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="built_in">strlen</span>(s);           <span class="comment">// 返回s的长度，不包括字符串结束符'\0'，其原理是从头开始遍历字符串，直到遇到'\0'</span></span><br><span class="line">  <span class="built_in">strcmp</span>(s1, s2);</span><br><span class="line">  <span class="built_in">strcat</span>(s1, s2);      <span class="comment">// 将字符串s2连接到s1后，并返回s1 </span></span><br><span class="line">  <span class="built_in">strcpy</span>(s1, s2);      <span class="comment">// 将s2复制给s1，并返回s1</span></span><br><span class="line">  <span class="built_in">strncat</span>(s1, s2, n);  <span class="comment">// 将s2的前n个字符连接到s1后面，并返回s1</span></span><br><span class="line">  <span class="built_in">strncpy</span>(s1, s2, n);  <span class="comment">// 将s2的前n个字符复制给s1，并返回s1</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *cp1 = <span class="string">"A string example"</span>;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *cp2 = <span class="string">"A different string"</span>;</span><br><span class="line">  <span class="keyword">if</span>(cp1 &lt; cp2)        <span class="comment">// 比较两个指针的地址，而非比较字符串内容</span></span><br><span class="line">		;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">int</span> i=<span class="built_in">strcmp</span>(cp1, cp2);   <span class="comment">// i为正数</span></span><br><span class="line">  i=<span class="built_in">strcmp</span>(cp2, cp1);       <span class="comment">// i为负数</span></span><br><span class="line">  i=<span class="built_in">strcmp</span>(cp1, cp1);       <span class="comment">// i为0</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="switch-语句"><a href="#switch-语句" class="headerlink" title="switch 语句"></a>switch 语句</h3><p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="comment">// 局部变量声明</span></span><br><span class="line">   <span class="keyword">char</span> grade = <span class="string">'D'</span>;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">switch</span>(grade)&#123;   <span class="comment">// 要判断的变量，不能忘记大括号</span></span><br><span class="line">   <span class="keyword">case</span> <span class="string">'A'</span> :            <span class="comment">// case和’A’之间要有空格，后面要有冒号</span></span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"很棒！"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">      <span class="keyword">break</span>;             <span class="comment">//可选，一般都有</span></span><br><span class="line">   <span class="keyword">case</span> <span class="string">'B'</span> :</span><br><span class="line">   <span class="keyword">case</span> <span class="string">'C'</span> :</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"做得好"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">   <span class="keyword">case</span> <span class="string">'D'</span> :</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"您通过了"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">   <span class="keyword">case</span> <span class="string">'F'</span> :</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"最好再试一下"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">   <span class="keyword">default</span> : <span class="comment">// 可选，所有未出现过的值</span></span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"无效的成绩"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="struct"><a href="#struct" class="headerlink" title="struct"></a>struct</h3><p>定义方法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Books</span>               // 定义结构图</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">char</span>  title[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  author[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  subject[<span class="number">100</span>];</span><br><span class="line">   <span class="keyword">int</span>   book_id;</span><br><span class="line">&#125; ;  <span class="comment">// 这里有个分号！</span></span><br><span class="line"></span><br><span class="line">Books book1;   <span class="comment">// 申明实体，C语言中规定前面要加 struct，即 struct Books book1 ,但C++中可不加</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="typedef"><a href="#typedef" class="headerlink" title="typedef"></a>typedef</h3><p>用法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;    <span class="comment">// 输入long long太麻烦，定义ll即为long long</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><p>用法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> num=<span class="number">10</span>;          <span class="comment">// num变量的值不能改变，并且要在其申明时赋初值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面的有点绕，但最好分清</span></span><br><span class="line"><span class="keyword">int</span>* <span class="keyword">const</span> p1=&amp;num;     <span class="comment">// p1只能指向num</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>* p2=&amp;num;     <span class="comment">// 不能通过p2来修改num的值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><ul>
+<li><p>程序改错，思考num2和num3输出结果的原因，将程序的输出结果改为三个0:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> nums1[<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> nums2[<span class="number">4</span>];</span><br><span class="line">  <span class="keyword">int</span> *num3=<span class="keyword">new</span>(<span class="number">4</span>);</span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;nums1[<span class="number">2</span>]&lt;&lt;nums2[<span class="number">2</span>]&lt;&lt;nums3[<span class="number">2</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设计一个程序，输入两个整数，输出它们的商，要求保留小数点后两位，并且宽度为6，不足用0补齐</p>
+</li>
+<li><p>设计一个程序，输入一个整数作为操作命令，输出其相对应的响应，（1:向左，2:向右，其他：错误）</p>
+</li>
+<li><p><a href="https://www.luogu.com.cn/problem/P1179" target="_blank" rel="noopener">https://www.luogu.com.cn/problem/P1179</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>bo233
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://bo233.top/2020/02/19/%E5%B0%8F%E8%AF%BE%E5%A0%8202-%E5%9F%BA%E7%A1%80%E7%AF%872/" title="小课堂02-基础篇2">http://bo233.top/2020/02/19/小课堂02-基础篇2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AB%9E%E8%B5%9B/" rel="tag"><i class="fa fa-tag"></i> 竞赛</a>
+              <a href="/tags/bo233%E5%B0%8F%E8%AF%BE%E5%A0%82/" rel="tag"><i class="fa fa-tag"></i> bo233小课堂</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/19/C++%E5%85%AB%E8%BF%9B%E5%88%B6%E3%80%81%E5%8D%81%E8%BF%9B%E5%88%B6%E3%80%81%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" rel="prev" title="C++ 八进制、十进制、十六进制的输入输出">
+      <i class="fa fa-chevron-left"></i> C++ 八进制、十进制、十六进制的输入输出
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/19/C%E9%A3%8E%E6%A0%BC%E5%AD%97%E7%AC%A6%E4%B8%B2-string/" rel="next" title="C风格字符串 & string">
+      C风格字符串 & string <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入输出格式控制"><span class="nav-number">1.</span> <span class="nav-text">输入输出格式控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cin和-cout"><span class="nav-number">1.1.</span> <span class="nav-text">cin和 cout</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#printf-和-scanf"><span class="nav-number">1.2.</span> <span class="nav-text">printf 和 scanf</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针与数组"><span class="nav-number">2.</span> <span class="nav-text">指针与数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C风格字符串"><span class="nav-number">3.</span> <span class="nav-text">C风格字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch-语句"><span class="nav-number">4.</span> <span class="nav-text">switch 语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#struct"><span class="nav-number">5.</span> <span class="nav-text">struct</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#typedef"><span class="nav-number">6.</span> <span class="nav-text">typedef</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const"><span class="nav-number">7.</span> <span class="nav-text">const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">8.</span> <span class="nav-text">题目</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bo233</p>
+  <div class="site-description" itemprop="description">码，码不停题。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bo233" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bo233" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ludingbo@hotmail.com" title="E-Mail → mailto:ludingbo@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.qh2333.com/" title="https:&#x2F;&#x2F;blog.qh2333.com" rel="noopener" target="_blank">QH2333</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/qq_45228537" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45228537" rel="noopener" target="_blank">Yuhan の Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://lihengdong.com/" title="https:&#x2F;&#x2F;lihengdong.com&#x2F;" rel="noopener" target="_blank">小東同學丶</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">苏ICP备20007407号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bo233</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'eceffff71bdf6bae04be',
+      clientSecret: '51f77e52116eaaee14a541a094107e80fb8381b3',
+      repo        : 'gitment-comments',
+      owner       : 'bo233',
+      admin       : ['bo233'],
+      id          : '4a0eae5e9c840a907d8580bb963fac63',
+        language: 'zh-CN',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
